@@ -3,33 +3,70 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import {
-  ArrowLeft,
-  Camera,
-  Palette,
-  Trophy,
-  Code,
-  Users2,
-  Leaf,
-  Lightbulb
+  BookOpen,
+  Users,
+  Building,
+ Phone,
+  Bus,
+  Coffee,
+  MapPin,
+  Compass
 } from "lucide-react"
 
-export default function ClubsPage() {
+export default function HomePage() {
+  const [isLoading, setIsLoading] = useState(true)
 
-  const clubs = [
-    { name: "Sports Club", icon: Trophy },
-    { name: "Photography Club", icon: Camera },
-    { name: "Arts Club", icon: Palette }
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 2000)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  const items = [
+    { name: "Academics", icon: BookOpen, href: "/academics" },
+    { name: "Clubs and Community", icon: Users, href: "/clubs" },
+    { name: "Campus and Hostel", icon: Building, href: "/campus" },
+    { name: "Contacts", icon: Phone, href: "/contacts" },
+    { name: "Transport", icon: Bus, href: "/transport" },
+    { name: "Local Lifestyle", icon: Coffee, href: "/lifestyle" },
   ]
 
-  const communities = [
-    { name: "TinkerHub", icon: Code },
-    { name: "Skill Development Club", icon: Lightbulb },
-    { name: "Lenient Tree", icon: Leaf },
-    { name: "μLearn", icon: Users2 }
-  ]
+  const bottomItem = {
+    name: "Student Guide",
+    icon: MapPin,
+    href: "/guide"
+  }
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-sand-dune flex flex-col items-center justify-center isolate transition-opacity duration-1000">
+
+        <div className="flex flex-col items-center gap-6 text-cyprus animate-in fade-in zoom-in-95 duration-1000">
+
+          <div className="p-6 bg-cyprus/5 rounded-3xl backdrop-blur-sm border border-cyprus/10 shadow-sm">
+            <Compass className="w-16 h-16 opacity-90 animate-[pulse_3s_ease-in-out_infinite]" />
+          </div>
+
+          <div className="text-center">
+            <h1 className="text-4xl font-bold tracking-tight mb-2">
+              SAATHI
+            </h1>
+
+            <p className="text-base font-medium opacity-70">
+              Starting up...
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    )
+  }
 
   return (
-    <div className="relative min-h-screen bg-sand-dune px-6 py-12 overflow-hidden isolate">
+    <div className="relative min-h-screen bg-sand-dune px-6 py-10 overflow-hidden isolate">
 
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[40%] left-[5%] w-[800px] h-[600px] bg-[#C1E1C1] rounded-[50%_50%_20%_80%/50%_20%_80%_50%] filter blur-[40px] opacity-65 rotate-[45deg]" />
@@ -37,85 +74,60 @@ export default function ClubsPage() {
         <div className="absolute bottom-[-15%] left-[-10%] w-[700px] h-[700px] bg-[#E6E6FA] rounded-[20%_80%_50%_50%/80%_50%_50%_20%] filter blur-[40px] opacity-70 -rotate-[30deg]" />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto mt-20">
+      <div className="relative z-10 max-w-4xl mx-auto mt-12">
 
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-cyprus hover:opacity-70 transition-opacity mb-8 group"
-        >
-          <ArrowLeft
-            size={20}
-            className="transition-transform group-hover:-translate-x-1"
-          />
-
-          <span className="font-bold tracking-tight uppercase text-sm">
-            Back to Home
-          </span>
-        </Link>
-
-        <h1 className="text-4xl md:text-5xl font-bold text-cyprus mb-16 text-center tracking-tight animate-in fade-in slide-in-from-top duration-700">
-          Clubs & Communities
+        <h1 className="text-4xl font-bold text-cyprus mb-12 text-center tracking-tight animate-in fade-in slide-in-from-top duration-700">
+          Welcome to SAATHI
         </h1>
 
-        <div className="flex flex-col gap-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mb-5">
 
-          <section className="animate-in fade-in slide-in-from-bottom duration-700">
+          {items.map((item, index) => (
+            <Link key={item.name} href={item.href}>
 
-            <h2 className="text-2xl font-black text-cyprus tracking-[0.2em] mb-8 border-b border-cyprus/10 pb-4">
-              CLUBS
-            </h2>
+              <div
+                className="glass group hover:bg-cyprus hover:text-sand-dune p-6 rounded-3xl transition-all duration-300 flex flex-col items-center justify-center gap-4 cursor-pointer border border-cyprus/5 shadow-sm text-center h-44 animate-in fade-in duration-500"
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
 
-            <div className="grid gap-4">
-
-              {clubs.map((club) => (
-                <div
-                  key={club.name}
-                  className="glass group hover:bg-cyprus hover:text-sand-dune p-5 rounded-2xl transition-all duration-300 flex items-center gap-5 cursor-pointer border border-cyprus/5 shadow-sm"
-                >
-
-                  <div className="bg-cyprus/10 group-hover:bg-sand-dune/20 p-3 rounded-xl transition-colors text-cyprus group-hover:text-sand-dune">
-                    <club.icon className="w-6 h-6" />
-                  </div>
-
-                  <span className="font-bold text-lg">
-                    {club.name}
-                  </span>
-
+                <div className="bg-cyprus/10 group-hover:bg-sand-dune/20 p-4 rounded-2xl transition-colors text-cyprus group-hover:text-sand-dune">
+                  <item.icon className="w-8 h-8" />
                 </div>
+
+                <span className="font-bold text-lg">
+                  {item.name}
+                </span>
+
+              </div>
+
+            </Link>
           ))}
 
         </div>
 
-          </section>
+        <div className="flex justify-center">
 
-          <section className="animate-in fade-in slide-in-from-bottom duration-700 delay-200">
+          <Link
+            href={bottomItem.href}
+            className="w-full sm:w-1/2 md:w-1/3"
+          >
 
-            <h2 className="text-2xl font-black text-cyprus tracking-[0.2em] mb-8 mt-8 border-b border-cyprus/10 pb-4">
-              COMMUNITIES
-            </h2>
+            <div
+              className="glass group hover:bg-cyprus hover:text-sand-dune p-6 rounded-3xl transition-all duration-300 flex flex-col items-center justify-center gap-4 cursor-pointer border border-cyprus/5 shadow-sm text-center h-44 animate-in fade-in duration-500"
+              style={{ animationDelay: "300ms" }}
+            >
 
-            <div className="grid gap-4">
-
-              {communities.map((community) => (
-                <div
-                  key={community.name}
-                  className="glass group hover:bg-cyprus hover:text-sand-dune p-5 rounded-2xl transition-all duration-300 flex items-center gap-5 cursor-pointer border border-cyprus/5 shadow-sm"
-                >
-
-                  <div className="bg-cyprus/10 group-hover:bg-sand-dune/20 p-3 rounded-xl transition-colors text-cyprus group-hover:text-sand-dune">
-                    <community.icon className="w-6 h-6" />
+              <div className="bg-cyprus/10 group-hover:bg-sand-dune/20 p-4 rounded-2xl transition-colors text-cyprus group-hover:text-sand-dune">
+                <bottomItem.icon className="w-8 h-8" />
               </div>
 
-                  <span className="font-bold text-lg">
-                    {community.name}
-                  </span>
-
-                </div>
-              ))}
+              <span className="font-bold text-lg">
+                {bottomItem.name}
+              </span>
 
             </div>
 
-          </section>
+          </Link>
 
         </div>
 

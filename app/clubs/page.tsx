@@ -12,7 +12,12 @@ import {
   Leaf,
   Lightbulb,
   Image as ImageIcon,
-  ChevronDown
+  ChevronDown,
+  Circle,
+  Square,
+  Triangle,
+  Hexagon,
+  Star
 } from "lucide-react"
 
 // --- ClubCard Component ---
@@ -38,34 +43,36 @@ function ClubCard({ item }: { item: any }) {
     setPositions(prev => [prev[2], prev[0], prev[1]]);
   };
 
-  const colors = ["bg-cyprus/10", "bg-cyprus/20", "bg-cyprus/30"];
+  const colors = isOpen 
+    ? ["bg-[#FAFAFA]/10", "bg-[#FAFAFA]/20", "bg-[#FAFAFA]/30"] 
+    : ["bg-cyprus/10", "bg-cyprus/20", "bg-cyprus/30"];
 
   return (
-    <div className={`glass group p-6 md:p-8 rounded-3xl transition-all duration-300 flex flex-col gap-6 border ${isOpen ? "border-cyprus/30 shadow-md" : "border-cyprus/10 shadow-sm hover:shadow-md hover:border-cyprus/20"}`}>
+    <div className={`group p-6 md:p-8 rounded-3xl transition-all duration-300 flex flex-col gap-6 border-2 border-cyprus shadow-sm hover:shadow-md cursor-pointer ${isOpen ? "bg-cyprus text-[#FAFAFA]" : "bg-[#FAFAFA] text-cyprus hover:bg-cyprus hover:text-[#FAFAFA]"}`}>
       
       {/* Header / Option Trigger */}
       <div 
-        className="flex items-center justify-between cursor-pointer w-full"
+        className="flex items-center justify-between w-full"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center gap-4">
-          <div className="bg-cyprus/10 group-hover:bg-cyprus group-hover:text-sand-dune p-4 rounded-2xl text-cyprus transition-colors duration-300">
+          <div className={`p-4 rounded-2xl transition-colors duration-300 ${isOpen ? "bg-[#FAFAFA] text-cyprus" : "bg-cyprus/10 group-hover:bg-[#FAFAFA] group-hover:text-cyprus"}`}>
             <item.icon className="w-8 h-8" />
           </div>
-          <h3 className="font-bold text-2xl text-cyprus">{item.name}</h3>
+          <h3 className="font-bold text-2xl">{item.name}</h3>
         </div>
-        <div className={`transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"}`}>
-          <ChevronDown className="w-6 h-6 text-cyprus/50" />
+        <div className={`transition-all duration-300 ${isOpen ? "rotate-180 text-[#FAFAFA]/70" : "rotate-0 opacity-50 group-hover:opacity-100"}`}>
+          <ChevronDown className="w-6 h-6" />
         </div>
       </div>
 
       {/* Expandable Content (Placeholders inside the option) */}
       {isOpen && (
-        <div className="flex flex-col md:flex-row items-center gap-12 pt-4 border-t border-cyprus/10 animate-in fade-in slide-in-from-top-4 duration-500">
+        <div className={`flex flex-col md:flex-row items-center gap-12 pt-4 border-t animate-in fade-in slide-in-from-top-4 duration-500 ${isOpen ? "border-[#FAFAFA]/20" : "border-cyprus/10"}`}>
           
           {/* Text / Info Side */}
           <div className="flex-1 w-full">
-            <p className="text-cyprus/70 leading-relaxed text-sm md:text-base">
+            <p className={`leading-relaxed text-sm md:text-base ${isOpen ? "text-[#FAFAFA]/90" : "text-cyprus/80"}`}>
               {item.description}
             </p>
           </div>
@@ -94,10 +101,10 @@ function ClubCard({ item }: { item: any }) {
               return (
                 <div 
                   key={photo.id}
-                  className={`absolute top-0 left-0 w-full h-full rounded-2xl border border-sand-dune/50 flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${colors[idx]} ${styles}`}
+                  className={`absolute top-0 left-0 w-full h-full rounded-2xl border flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${colors[idx]} ${styles} ${isOpen ? "border-[#FAFAFA]/20" : "border-cyprus/10"}`}
                 >
-                  <ImageIcon className="w-8 h-8 text-cyprus/40 mb-2" />
-                  <span className="text-cyprus/60 font-semibold text-sm px-2 text-center">{photo.label}</span>
+                  <ImageIcon className={`w-8 h-8 mb-2 ${isOpen ? "text-[#FAFAFA]/60" : "text-cyprus/40"}`} />
+                  <span className={`font-semibold text-sm px-2 text-center ${isOpen ? "text-[#FAFAFA]/80" : "text-cyprus/60"}`}>{photo.label}</span>
                 </div>
               );
             })}
@@ -164,6 +171,28 @@ export default function ClubsPage() {
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[40%] left-[5%] w-[800px] h-[600px] bg-[#C1E1C1] rounded-[50%_50%_20%_80%/50%_20%_80%_50%] filter blur-[40px] opacity-65 rotate-[45deg]" />
         <div className="absolute bottom-[-15%] left-[-10%] w-[700px] h-[700px] bg-[#E6E6FA] rounded-[20%_80%_50%_50%/80%_50%_50%_20%] filter blur-[40px] opacity-70 -rotate-[30deg]" />
+
+        {/* Random Floating Elements (No fill, 50% opacity) */}
+        <Circle className="absolute top-[15%] left-[10%] w-12 h-12 text-cyprus opacity-50 -rotate-12" strokeWidth={1.5} />
+        <Triangle className="absolute top-[25%] right-[15%] w-16 h-16 text-cyprus opacity-50 rotate-45" strokeWidth={1.5} />
+        <Square className="absolute bottom-[20%] left-[15%] w-10 h-10 text-cyprus opacity-50 rotate-12" strokeWidth={1.5} />
+        <Hexagon className="absolute bottom-[30%] right-[10%] w-14 h-14 text-cyprus opacity-50 rotate-[60deg]" strokeWidth={1.5} />
+        <Star className="absolute top-[50%] left-[4%] w-8 h-8 text-cyprus opacity-50 -rotate-45" strokeWidth={1.5} />
+        <Circle className="absolute top-[60%] right-[5%] w-6 h-6 text-cyprus opacity-50 rotate-90" strokeWidth={1.5} />
+        <Triangle className="absolute bottom-[10%] right-[30%] w-8 h-8 text-cyprus opacity-50 -rotate-[30deg]" strokeWidth={1.5} />
+        <Square className="absolute top-[10%] right-[40%] w-5 h-5 text-cyprus opacity-50 rotate-12" strokeWidth={1.5} />
+        
+        {/* Additional 10 elements */}
+        <Hexagon className="absolute top-[5%] right-[25%] w-7 h-7 text-cyprus opacity-50 rotate-[15deg]" strokeWidth={1.5} />
+        <Star className="absolute bottom-[40%] left-[20%] w-10 h-10 text-cyprus opacity-50 rotate-180" strokeWidth={1.5} />
+        <Circle className="absolute top-[35%] left-[40%] w-5 h-5 text-cyprus opacity-50 -rotate-90" strokeWidth={1.5} />
+        <Triangle className="absolute bottom-[15%] left-[45%] w-12 h-12 text-cyprus opacity-50 rotate-[75deg]" strokeWidth={1.5} />
+        <Square className="absolute top-[45%] right-[20%] w-8 h-8 text-cyprus opacity-50 rotate-45" strokeWidth={1.5} />
+        <Hexagon className="absolute bottom-[5%] left-[5%] w-16 h-16 text-cyprus opacity-50 -rotate-12" strokeWidth={1.5} />
+        <Star className="absolute top-[80%] right-[15%] w-12 h-12 text-cyprus opacity-50 rotate-[120deg]" strokeWidth={1.5} />
+        <Circle className="absolute top-[10%] left-[60%] w-14 h-14 text-cyprus opacity-50 rotate-[30deg]" strokeWidth={1.5} />
+        <Triangle className="absolute top-[75%] left-[30%] w-6 h-6 text-cyprus opacity-50 rotate-[-60deg]" strokeWidth={1.5} />
+        <Square className="absolute bottom-[40%] right-[45%] w-9 h-9 text-cyprus opacity-50 rotate-[-15deg]" strokeWidth={1.5} />
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto mt-4 md:mt-12">

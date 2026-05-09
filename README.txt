@@ -1,5 +1,3 @@
----
-
 # 🚀 SAATHI
 
 > Comprehensive documentation and tech stack breakdown for the **SAATHI** project.

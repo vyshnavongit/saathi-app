@@ -1,12 +1,14 @@
 "use client"
 
+import Image from "next/image"
 import { useState, useEffect } from "react"
 import Link from "next/link"
+
 import {
   BookOpen,
   Users,
   Building,
- Phone,
+  Phone,
   Bus,
   Coffee,
   MapPin,
@@ -14,6 +16,7 @@ import {
 } from "lucide-react"
 
 export default function HomePage() {
+
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -39,17 +42,23 @@ export default function HomePage() {
     href: "/guide"
   }
 
+  // Loading Screen
   if (isLoading) {
     return (
       <div className="min-h-screen bg-sand-dune flex flex-col items-center justify-center isolate transition-opacity duration-1000">
 
-        <div className="flex flex-col items-center gap-6 text-cyprus animate-in fade-in zoom-in-95 duration-1000">
+        <div className="flex flex-col items-center text-cyprus animate-in fade-in zoom-in-95 duration-1000">
 
-          <div className="p-6 bg-cyprus/5 rounded-3xl backdrop-blur-sm border border-cyprus/10 shadow-sm">
-            <Compass className="w-16 h-16 opacity-90 animate-[pulse_3s_ease-in-out_infinite]" />
-          </div>
+          <Image
+            src="/logo.png"
+            alt="SAATHI Logo"
+            width={320}
+            height={320}
+            className="opacity-90 animate-[pulse_3s_ease-in-out_infinite] object-contain"
+          />
 
-          <div className="text-center">
+          <div className="text-center -mt-10">
+
             <h1 className="text-4xl font-bold tracking-tight mb-2">
               SAATHI
             </h1>
@@ -57,6 +66,7 @@ export default function HomePage() {
             <p className="text-base font-medium opacity-70">
               Starting up...
             </p>
+
           </div>
 
         </div>
@@ -65,13 +75,17 @@ export default function HomePage() {
     )
   }
 
+  // Main Application
   return (
     <div className="relative min-h-screen bg-sand-dune px-6 py-10 overflow-hidden isolate">
 
+      {/* Background Decoration */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+
         <div className="absolute top-[40%] left-[5%] w-[800px] h-[600px] bg-[#C1E1C1] rounded-[50%_50%_20%_80%/50%_20%_80%_50%] filter blur-[40px] opacity-65 rotate-[45deg]" />
 
         <div className="absolute bottom-[-15%] left-[-10%] w-[700px] h-[700px] bg-[#E6E6FA] rounded-[20%_80%_50%_50%/80%_50%_50%_20%] filter blur-[40px] opacity-70 -rotate-[30deg]" />
+
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto mt-12">
@@ -80,6 +94,7 @@ export default function HomePage() {
           Welcome to SAATHI
         </h1>
 
+        {/* 3x2 Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mb-5">
 
           {items.map((item, index) => (
@@ -105,6 +120,7 @@ export default function HomePage() {
 
         </div>
 
+        {/* Bottom Card */}
         <div className="flex justify-center">
 
           <Link

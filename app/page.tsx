@@ -1,57 +1,125 @@
- import { Button } from "@/components/ui/button"
- import { ArrowRight, BrainCircuit, Globe, Zap } from "lucide-react"
- 
- export default function LandingPage() {
-   return (
-     <div className="relative min-h-screen overflow-hidden">
-       {/* Background Decoration */}
-       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
-         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px]" />
-         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[120px]" />
-       </div>
- 
-       <section className="max-w-7xl mx-auto px-6 pt-20 pb-32 text-center">
-         <div className="inline-flex items-center gap-2 bg-muted px-4 py-1.5 rounded-full text-sm font-medium mb-8">
-           <Zap className="w-4 h-4 text-primary fill-primary" />
-           <span>Revolutionizing Hackathon Workflows</span>
-         </div>
-         
-         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
-           Meet <span className="text-primary">SAATHI</span>. <br />
-           Your Intelligence Partner.
-         </h1>
-         
-         <p className="max-w-2xl mx-auto text-lg text-muted-foreground mb-10">
-           Built for the next generation of creators. Saathi leverages Google Gemini to transform your ideas into reality faster than ever.
-         </p>
- 
-         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-           <Button size="lg" className="h-14 px-8 text-lg rounded-2xl hover-glow">
-             Start Building Now <ArrowRight className="ml-2 w-5 h-5" />
-           </Button>
-           <Button variant="outline" size="lg" className="h-14 px-8 text-lg rounded-2xl">
-             View Demo
-           </Button>
-         </div>
- 
-         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-32 text-left">
-           <FeatureCard icon={<BrainCircuit className="w-6 h-6" />} title="Smart Logic" description="Context-aware AI that understands your project needs instantly." />
-           <FeatureCard icon={<Globe className="w-6 h-6" />} title="Global Sync" description="Seamlessly connect your tools and data sources in one place." />
-           <FeatureCard icon={<Zap className="w-6 h-6" />} title="Ultra Fast" description="Optimized for speed with Next.js 16 and Turbopack support." />
-         </div>
-       </section>
-     </div>
-   )
- }
- 
- function FeatureCard({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) {
-   return (
-     <div className="p-8 rounded-3xl border bg-card/50 hover:bg-card transition-colors group">
-       <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
-         {icon}
-       </div>
-       <h3 className="text-xl font-bold mb-3">{title}</h3>
-       <p className="text-muted-foreground leading-relaxed">{description}</p>
-     </div>
-   )
- }
+"use client"
+
+import Link from "next/link"
+import {
+  ArrowLeft,
+  Camera,
+  Palette,
+  Trophy,
+  Code,
+  Users2,
+  Leaf,
+  Lightbulb
+} from "lucide-react"
+
+export default function ClubsPage() {
+
+  const clubs = [
+    { name: "Sports Club", icon: Trophy },
+    { name: "Photography Club", icon: Camera },
+    { name: "Arts Club", icon: Palette }
+  ]
+
+  const communities = [
+    { name: "TinkerHub", icon: Code },
+    { name: "Skill Development Club", icon: Lightbulb },
+    { name: "Lenient Tree", icon: Leaf },
+    { name: "μLearn", icon: Users2 }
+  ]
+
+  return (
+    <div className="relative min-h-screen bg-sand-dune px-6 py-12 overflow-hidden isolate">
+
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-[40%] left-[5%] w-[800px] h-[600px] bg-[#C1E1C1] rounded-[50%_50%_20%_80%/50%_20%_80%_50%] filter blur-[40px] opacity-65 rotate-[45deg]" />
+
+        <div className="absolute bottom-[-15%] left-[-10%] w-[700px] h-[700px] bg-[#E6E6FA] rounded-[20%_80%_50%_50%/80%_50%_50%_20%] filter blur-[40px] opacity-70 -rotate-[30deg]" />
+      </div>
+
+      <div className="relative z-10 max-w-4xl mx-auto mt-20">
+
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-cyprus hover:opacity-70 transition-opacity mb-8 group"
+        >
+          <ArrowLeft
+            size={20}
+            className="transition-transform group-hover:-translate-x-1"
+          />
+
+          <span className="font-bold tracking-tight uppercase text-sm">
+            Back to Home
+          </span>
+        </Link>
+
+        <h1 className="text-4xl md:text-5xl font-bold text-cyprus mb-16 text-center tracking-tight animate-in fade-in slide-in-from-top duration-700">
+          Clubs & Communities
+        </h1>
+
+        <div className="flex flex-col gap-20">
+
+          <section className="animate-in fade-in slide-in-from-bottom duration-700">
+
+            <h2 className="text-2xl font-black text-cyprus tracking-[0.2em] mb-8 border-b border-cyprus/10 pb-4">
+              CLUBS
+            </h2>
+
+            <div className="grid gap-4">
+
+              {clubs.map((club) => (
+                <div
+                  key={club.name}
+                  className="glass group hover:bg-cyprus hover:text-sand-dune p-5 rounded-2xl transition-all duration-300 flex items-center gap-5 cursor-pointer border border-cyprus/5 shadow-sm"
+                >
+
+                  <div className="bg-cyprus/10 group-hover:bg-sand-dune/20 p-3 rounded-xl transition-colors text-cyprus group-hover:text-sand-dune">
+                    <club.icon className="w-6 h-6" />
+                  </div>
+
+                  <span className="font-bold text-lg">
+                    {club.name}
+                  </span>
+
+                </div>
+              ))}
+
+            </div>
+
+          </section>
+
+          <section className="animate-in fade-in slide-in-from-bottom duration-700 delay-200">
+
+            <h2 className="text-2xl font-black text-cyprus tracking-[0.2em] mb-8 mt-8 border-b border-cyprus/10 pb-4">
+              COMMUNITIES
+            </h2>
+
+            <div className="grid gap-4">
+
+              {communities.map((community) => (
+                <div
+                  key={community.name}
+                  className="glass group hover:bg-cyprus hover:text-sand-dune p-5 rounded-2xl transition-all duration-300 flex items-center gap-5 cursor-pointer border border-cyprus/5 shadow-sm"
+                >
+
+                  <div className="bg-cyprus/10 group-hover:bg-sand-dune/20 p-3 rounded-xl transition-colors text-cyprus group-hover:text-sand-dune">
+                    <community.icon className="w-6 h-6" />
+                  </div>
+
+                  <span className="font-bold text-lg">
+                    {community.name}
+                  </span>
+
+                </div>
+              ))}
+
+            </div>
+
+          </section>
+
+        </div>
+
+      </div>
+
+    </div>
+  )
+}

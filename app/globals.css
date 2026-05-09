@@ -2,6 +2,9 @@
 @import "tw-animate-css";
 
 @theme {
+  --color-cyprus: #004643;
+  --color-sand-dune: #FAF0CA;
+
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
   --color-card: hsl(var(--card));
@@ -24,17 +27,24 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
+
+  @keyframes shooting {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.2; }
+    90% { opacity: 0.2; }
+    100% { transform: translate(-120vw, 120vh) rotate(360deg); opacity: 0; }
+  }
 }
 
 @layer base {
   :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
+    --background: 96.6% 0.031 92.5; /* #FAF0CA - Lemon Chiffon */
+    --foreground: 23.53% 0.057 182.25; /* #004643 - Cyprus */
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
+    --primary: 23.53% 0.057 182.25; /* #004643 - Cyprus */
     --primary-foreground: oklch(0.985 0 0);
     --secondary: oklch(0.97 0 0);
     --secondary-foreground: oklch(0.205 0 0);
@@ -73,7 +83,7 @@
 
 @layer base {
   * { @apply border-border; }
-  body { @apply bg-background text-foreground; }
+  body { @apply bg-sand-dune text-cyprus; }
 }
 
 .glass {

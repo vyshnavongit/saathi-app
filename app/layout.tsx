@@ -19,9 +19,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={cn("scroll-smooth", "font-sans", geist.variable)}>
+    <html lang="en" className={cn("scroll-smooth", "font-sans", geist.variable)} suppressHydrationWarning>
       <body className={`${inter.className} antialiased`}>
-        <main className="pt-24">{children}</main>
+        <main>{children}</main>
       </body>
     </html>
   );

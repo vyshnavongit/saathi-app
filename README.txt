@@ -41,10 +41,10 @@ SAATHI is built on a modern, decoupled architecture designed for scalability and
 
 ### 📦 Essential Libraries
 
-* **Forms:** [React Hook Form](https://react-hook-form.com/) — *Efficient, flexible, and extensible form handling.*
-* **Validation:** [Zod](https://zod.dev/) — *TypeScript-first schema validation.*
-* **Icons:** [Lucide React](https://lucide.dev/) — *Beautiful and consistent icon toolkit.*
-* **Animations:** [Framer Motion](https://www.framer.com/motion/) *(Optional)* — *Production-ready animations for React.*
+* **Forms:** [React Hook Form](https://react-hook-form.com/) : *Efficient, flexible, and extensible form handling.*
+* **Validation:** [Zod](https://zod.dev/) : *TypeScript-first schema validation.*
+* **Icons:** [Lucide React](https://lucide.dev/) : *Beautiful and consistent icon toolkit.*
+* **Animations:** [Framer Motion](https://www.framer.com/motion/) *(Optional)* : *Production-ready animations for React.*
 
 ---
 

@@ -15,6 +15,8 @@ import {
   Phone,
   MapPin
 } from "lucide-react"
+import { ThemeToggle } from "../../components/ThemeToggle"
+import { BackgroundShapes } from "../../components/BackgroundShapes"
 
 export default function CampusPage() {
   const [activeView, setActiveView] = useState<"campusMap" | "hostelInfo" | "hostelMap">("campusMap");
@@ -87,32 +89,15 @@ export default function CampusPage() {
   const activeHostels = activeTab === "ladies" ? ladiesHostels : gentsHostels;
 
   return (
-    <div className="relative min-h-screen bg-sand-dune px-6 py-12 overflow-hidden isolate">
-      {/* Background blobs (fixed so they remain during scroll) */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[40%] left-[5%] w-[800px] h-[600px] bg-[#C1E1C1] rounded-[50%_50%_20%_80%/50%_20%_80%_50%] filter blur-[40px] opacity-65 rotate-[45deg]" />
-        <div className="absolute bottom-[-15%] left-[-10%] w-[700px] h-[700px] bg-[#E6E6FA] rounded-[20%_80%_50%_50%/80%_50%_50%_20%] filter blur-[40px] opacity-70 -rotate-[30deg]" />
-
-        {/* Random Floating Elements (No fill, 50% opacity) */}
-        <Circle className="absolute top-[15%] left-[10%] w-12 h-12 text-cyprus opacity-50 -rotate-12" strokeWidth={1.5} />
-        <Triangle className="absolute top-[25%] right-[15%] w-16 h-16 text-cyprus opacity-50 rotate-45" strokeWidth={1.5} />
-        <Square className="absolute bottom-[20%] left-[15%] w-10 h-10 text-cyprus opacity-50 rotate-12" strokeWidth={1.5} />
-        <Hexagon className="absolute bottom-[30%] right-[10%] w-14 h-14 text-cyprus opacity-50 rotate-[60deg]" strokeWidth={1.5} />
-        <Star className="absolute top-[50%] left-[4%] w-8 h-8 text-cyprus opacity-50 -rotate-45" strokeWidth={1.5} />
-        <Circle className="absolute top-[60%] right-[5%] w-6 h-6 text-cyprus opacity-50 rotate-90" strokeWidth={1.5} />
-        <Triangle className="absolute bottom-[10%] right-[30%] w-8 h-8 text-cyprus opacity-50 -rotate-[30deg]" strokeWidth={1.5} />
-        <Square className="absolute top-[10%] right-[40%] w-5 h-5 text-cyprus opacity-50 rotate-12" strokeWidth={1.5} />
-        
-        {/* Additional 10 elements */}
-        <Hexagon className="absolute top-[5%] right-[25%] w-7 h-7 text-cyprus opacity-50 rotate-[15deg]" strokeWidth={1.5} />
-        <Star className="absolute bottom-[40%] left-[20%] w-10 h-10 text-cyprus opacity-50 rotate-180" strokeWidth={1.5} />
-        <Circle className="absolute top-[35%] left-[40%] w-5 h-5 text-cyprus opacity-50 -rotate-90" strokeWidth={1.5} />
-      </div>
+    <div className="relative min-h-screen bg-sand-dune dark:bg-[#0C1519] px-6 py-12 overflow-hidden isolate transition-colors duration-300">
+      
+      <ThemeToggle />
+      <BackgroundShapes />
 
       <div className="relative z-10 max-w-5xl mx-auto mt-4 md:mt-12">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-cyprus hover:opacity-70 transition-opacity mb-8 group"
+          className="inline-flex items-center gap-2 text-cyprus dark:text-[#CF9D7B] hover:opacity-70 transition-opacity mb-8 group"
         >
           <ArrowLeft
             size={20}
@@ -123,37 +108,37 @@ export default function CampusPage() {
           </span>
         </Link>
 
-        <h1 className="text-4xl md:text-5xl font-bold text-cyprus mb-16 text-center tracking-tight animate-in fade-in slide-in-from-top duration-700">
+        <h1 className="text-4xl md:text-5xl font-bold text-cyprus dark:text-[#CF9D7B] mb-16 text-center tracking-tight animate-in fade-in slide-in-from-top duration-700 transition-colors duration-300">
           Campus & Hostel
         </h1>
 
         <div className="flex flex-col sm:flex-row gap-4 mb-12 animate-in fade-in slide-in-from-bottom duration-700">
           <button
             onClick={() => setActiveView("campusMap")}
-            className={`flex-1 py-4 px-2 text-center rounded-2xl font-bold transition-all border-2 border-cyprus shadow-sm hover:shadow-md ${
+            className={`flex-1 py-4 px-2 text-center rounded-2xl font-bold transition-all border-2 border-cyprus dark:border-[#CF9D7B] shadow-sm hover:shadow-md ${
               activeView === "campusMap"
-                ? "bg-cyprus text-[#FAFAFA]"
-                : "bg-[#FAFAFA] text-cyprus hover:bg-cyprus/10"
+                ? "bg-cyprus dark:bg-[#CF9D7B] text-[#FAFAFA] dark:text-[#0C1519]"
+                : "bg-[#FAFAFA] dark:bg-[#0C1519] text-cyprus dark:text-[#CF9D7B] hover:bg-cyprus/10 dark:hover:bg-[#CF9D7B]/10"
             }`}
           >
             Campus Map
           </button>
           <button
             onClick={() => setActiveView("hostelInfo")}
-            className={`flex-1 py-4 px-2 text-center rounded-2xl font-bold transition-all border-2 border-cyprus shadow-sm hover:shadow-md ${
+            className={`flex-1 py-4 px-2 text-center rounded-2xl font-bold transition-all border-2 border-cyprus dark:border-[#CF9D7B] shadow-sm hover:shadow-md ${
               activeView === "hostelInfo"
-                ? "bg-cyprus text-[#FAFAFA]"
-                : "bg-[#FAFAFA] text-cyprus hover:bg-cyprus/10"
+                ? "bg-cyprus dark:bg-[#CF9D7B] text-[#FAFAFA] dark:text-[#0C1519]"
+                : "bg-[#FAFAFA] dark:bg-[#0C1519] text-cyprus dark:text-[#CF9D7B] hover:bg-cyprus/10 dark:hover:bg-[#CF9D7B]/10"
             }`}
           >
             Hostel Info
           </button>
           <button
             onClick={() => setActiveView("hostelMap")}
-            className={`flex-1 py-4 px-2 text-center rounded-2xl font-bold transition-all border-2 border-cyprus shadow-sm hover:shadow-md ${
+            className={`flex-1 py-4 px-2 text-center rounded-2xl font-bold transition-all border-2 border-cyprus dark:border-[#CF9D7B] shadow-sm hover:shadow-md ${
               activeView === "hostelMap"
-                ? "bg-cyprus text-[#FAFAFA]"
-                : "bg-[#FAFAFA] text-cyprus hover:bg-cyprus/10"
+                ? "bg-cyprus dark:bg-[#CF9D7B] text-[#FAFAFA] dark:text-[#0C1519]"
+                : "bg-[#FAFAFA] dark:bg-[#0C1519] text-cyprus dark:text-[#CF9D7B] hover:bg-cyprus/10 dark:hover:bg-[#CF9D7B]/10"
             }`}
           >
             Hostel Maps
@@ -164,15 +149,15 @@ export default function CampusPage() {
           {/* Campus Map Section */}
           {activeView === "campusMap" && (
             <section className="animate-in fade-in slide-in-from-bottom duration-500">
-              <div className="flex items-center gap-3 mb-8 border-b border-cyprus/10 pb-4">
-                <MapIcon className="w-8 h-8 text-cyprus" />
-                <h2 className="text-2xl font-black text-cyprus tracking-[0.2em]">
+              <div className="flex items-center gap-3 mb-8 border-b border-cyprus/10 dark:border-[#CF9D7B]/10 pb-4">
+                <MapIcon className="w-8 h-8 text-cyprus dark:text-[#CF9D7B]" />
+                <h2 className="text-2xl font-black text-cyprus dark:text-[#CF9D7B] tracking-[0.2em]">
                   CAMPUS MAP
                 </h2>
               </div>
               
-              <div className="bg-[#FAFAFA] border-2 border-cyprus p-4 md:p-6 rounded-3xl shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-full aspect-square md:aspect-[16/9] bg-cyprus/5 rounded-2xl border border-cyprus/10 overflow-hidden relative flex items-center justify-center">
+              <div className="bg-[#FAFAFA] dark:bg-[#0C1519] border-2 border-cyprus dark:border-[#CF9D7B] p-4 md:p-6 rounded-3xl shadow-sm hover:shadow-md transition-shadow">
+                <div className="w-full aspect-square md:aspect-[16/9] bg-cyprus/5 dark:bg-[#CF9D7B]/5 rounded-2xl border border-cyprus/10 dark:border-[#CF9D7B]/10 overflow-hidden relative flex items-center justify-center">
                   <img 
                     src="/map.png" 
                     alt="Campus Map" 
@@ -182,7 +167,7 @@ export default function CampusPage() {
                       e.currentTarget.style.display = 'none';
                     }}
                   />
-                  <div className="text-cyprus/40 flex flex-col items-center gap-2 absolute">
+                  <div className="text-cyprus/40 dark:text-[#CF9D7B]/40 flex flex-col items-center gap-2 absolute">
                     <MapIcon className="w-12 h-12" />
                     <span className="font-semibold text-center px-4">Map image goes here<br/>(Place `map.png` in your public folder)</span>
                   </div>
@@ -194,9 +179,9 @@ export default function CampusPage() {
           {/* Hostel Facilities Section */}
           {activeView === "hostelInfo" && (
             <section className="animate-in fade-in slide-in-from-bottom duration-500">
-              <div className="flex items-center gap-3 mb-8 border-b border-cyprus/10 pb-4">
-                <Building className="w-8 h-8 text-cyprus" />
-                <h2 className="text-2xl font-black text-cyprus tracking-[0.2em]">
+              <div className="flex items-center gap-3 mb-8 border-b border-cyprus/10 dark:border-[#CF9D7B]/10 pb-4">
+                <Building className="w-8 h-8 text-cyprus dark:text-[#CF9D7B]" />
+                <h2 className="text-2xl font-black text-cyprus dark:text-[#CF9D7B] tracking-[0.2em]">
                   HOSTEL FACILITIES
                 </h2>
               </div>
@@ -205,20 +190,20 @@ export default function CampusPage() {
               <div className="flex gap-4 mb-8">
                 <button
                   onClick={() => setActiveTab("ladies")}
-                  className={`flex-1 py-4 text-center rounded-2xl font-bold transition-all border-2 border-cyprus shadow-sm hover:shadow-md ${
+                  className={`flex-1 py-4 text-center rounded-2xl font-bold transition-all border-2 border-cyprus dark:border-[#CF9D7B] shadow-sm hover:shadow-md ${
                     activeTab === "ladies"
-                      ? "bg-cyprus text-[#FAFAFA]"
-                      : "bg-[#FAFAFA] text-cyprus hover:bg-cyprus/10"
+                      ? "bg-cyprus dark:bg-[#CF9D7B] text-[#FAFAFA] dark:text-[#0C1519]"
+                      : "bg-[#FAFAFA] dark:bg-[#0C1519] text-cyprus dark:text-[#CF9D7B] hover:bg-cyprus/10 dark:hover:bg-[#CF9D7B]/10"
                   }`}
                 >
                   Ladies Hostels
                 </button>
                 <button
                   onClick={() => setActiveTab("gents")}
-                  className={`flex-1 py-4 text-center rounded-2xl font-bold transition-all border-2 border-cyprus shadow-sm hover:shadow-md ${
+                  className={`flex-1 py-4 text-center rounded-2xl font-bold transition-all border-2 border-cyprus dark:border-[#CF9D7B] shadow-sm hover:shadow-md ${
                     activeTab === "gents"
-                      ? "bg-cyprus text-[#FAFAFA]"
-                      : "bg-[#FAFAFA] text-cyprus hover:bg-cyprus/10"
+                      ? "bg-cyprus dark:bg-[#CF9D7B] text-[#FAFAFA] dark:text-[#0C1519]"
+                      : "bg-[#FAFAFA] dark:bg-[#0C1519] text-cyprus dark:text-[#CF9D7B] hover:bg-cyprus/10 dark:hover:bg-[#CF9D7B]/10"
                   }`}
                 >
                   Gents Hostels
@@ -230,17 +215,17 @@ export default function CampusPage() {
                 {activeHostels.map((hostel, index) => (
                   <div
                     key={index}
-                    className="bg-[#FAFAFA] border-2 border-cyprus/20 p-5 rounded-2xl shadow-sm hover:border-cyprus hover:shadow-md transition-all flex flex-col justify-between"
+                    className="bg-[#FAFAFA] dark:bg-[#0C1519] border-2 border-cyprus/20 dark:border-[#CF9D7B]/20 p-5 rounded-2xl shadow-sm hover:border-cyprus dark:hover:border-[#CF9D7B] hover:shadow-md transition-all flex flex-col justify-between"
                   >
-                    <h3 className="font-bold text-cyprus text-lg mb-4">{hostel.name}</h3>
+                    <h3 className="font-bold text-cyprus dark:text-[#CF9D7B] text-lg mb-4">{hostel.name}</h3>
                     <div className="space-y-3">
-                      <div className="flex items-center gap-2 text-cyprus/80">
+                      <div className="flex items-center gap-2 text-cyprus/80 dark:text-[#CF9D7B]/80">
                         <User className="w-4 h-4 shrink-0" />
                         <span className="text-sm font-medium">{hostel.contact}</span>
                       </div>
                       <a
                         href={`tel:${hostel.phone}`}
-                        className="flex items-center gap-2 text-cyprus hover:text-opacity-70 transition-colors w-max"
+                        className="flex items-center gap-2 text-cyprus dark:text-[#CF9D7B] hover:text-opacity-70 transition-colors w-max"
                       >
                         <Phone className="w-4 h-4 shrink-0" />
                         <span className="text-sm font-bold">{hostel.phone}</span>
@@ -255,9 +240,9 @@ export default function CampusPage() {
           {/* Hostel Maps Section */}
           {activeView === "hostelMap" && (
             <section className="animate-in fade-in slide-in-from-bottom duration-500">
-              <div className="flex items-center gap-3 mb-8 border-b border-cyprus/10 pb-4">
-                <MapPin className="w-8 h-8 text-cyprus" />
-                <h2 className="text-2xl font-black text-cyprus tracking-[0.2em]">
+              <div className="flex items-center gap-3 mb-8 border-b border-cyprus/10 dark:border-[#CF9D7B]/10 pb-4">
+                <MapPin className="w-8 h-8 text-cyprus dark:text-[#CF9D7B]" />
+                <h2 className="text-2xl font-black text-cyprus dark:text-[#CF9D7B] tracking-[0.2em]">
                   HOSTEL MAPS
                 </h2>
               </div>
@@ -266,28 +251,28 @@ export default function CampusPage() {
               <div className="flex gap-4 mb-8">
                 <button
                   onClick={() => setActiveTab("ladies")}
-                  className={`flex-1 py-4 text-center rounded-2xl font-bold transition-all border-2 border-cyprus shadow-sm hover:shadow-md ${
+                  className={`flex-1 py-4 text-center rounded-2xl font-bold transition-all border-2 border-cyprus dark:border-[#CF9D7B] shadow-sm hover:shadow-md ${
                     activeTab === "ladies"
-                      ? "bg-cyprus text-[#FAFAFA]"
-                      : "bg-[#FAFAFA] text-cyprus hover:bg-cyprus/10"
+                      ? "bg-cyprus dark:bg-[#CF9D7B] text-[#FAFAFA] dark:text-[#0C1519]"
+                      : "bg-[#FAFAFA] dark:bg-[#0C1519] text-cyprus dark:text-[#CF9D7B] hover:bg-cyprus/10 dark:hover:bg-[#CF9D7B]/10"
                   }`}
                 >
                   Ladies Hostels Map
                 </button>
                 <button
                   onClick={() => setActiveTab("gents")}
-                  className={`flex-1 py-4 text-center rounded-2xl font-bold transition-all border-2 border-cyprus shadow-sm hover:shadow-md ${
+                  className={`flex-1 py-4 text-center rounded-2xl font-bold transition-all border-2 border-cyprus dark:border-[#CF9D7B] shadow-sm hover:shadow-md ${
                     activeTab === "gents"
-                      ? "bg-cyprus text-[#FAFAFA]"
-                      : "bg-[#FAFAFA] text-cyprus hover:bg-cyprus/10"
+                      ? "bg-cyprus dark:bg-[#CF9D7B] text-[#FAFAFA] dark:text-[#0C1519]"
+                      : "bg-[#FAFAFA] dark:bg-[#0C1519] text-cyprus dark:text-[#CF9D7B] hover:bg-cyprus/10 dark:hover:bg-[#CF9D7B]/10"
                   }`}
                 >
                   Gents Hostels Map
                 </button>
               </div>
 
-              <div className="bg-[#FAFAFA] border-2 border-cyprus p-4 md:p-6 rounded-3xl shadow-sm">
-                <div className="w-full aspect-[4/3] md:aspect-[16/9] rounded-2xl border border-cyprus/10 overflow-hidden relative">
+              <div className="bg-[#FAFAFA] dark:bg-[#0C1519] border-2 border-cyprus dark:border-[#CF9D7B] p-4 md:p-6 rounded-3xl shadow-sm">
+                <div className="w-full aspect-[4/3] md:aspect-[16/9] rounded-2xl border border-cyprus/10 dark:border-[#CF9D7B]/10 overflow-hidden relative">
                   {activeTab === "ladies" ? (
                     <iframe src="https://maps.google.com/maps?q=ladies+hostels+near+CUCEK,+Pulincunnoo&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style={{border: 0}} allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="absolute inset-0"></iframe>
                   ) : (

@@ -10,6 +10,8 @@ import {
   ArrowLeft,
   MapPin
 } from "lucide-react"
+import { ThemeToggle } from "../../../components/ThemeToggle"
+import { BackgroundShapes } from "../../../components/BackgroundShapes"
 
 export default function PlacePage() {
 
@@ -277,61 +279,50 @@ export default function PlacePage() {
   }
 
   const currentPlace = places[place]
+  const displayImages = currentPlace ? currentPlace.images.slice(0, 3) : []
 
-  const [currentImage, setCurrentImage] = useState(0)
-
-  const nextImage = () => {
-    setCurrentImage((prev) =>
-      prev === currentPlace.images.length - 1 ? 0 : prev + 1
-    )
-  }
-
-  const prevImage = () => {
-    setCurrentImage((prev) =>
-      prev === 0 ? currentPlace.images.length - 1 : prev - 1
-    )
-  }
+  const [positions, setPositions] = useState(() => {
+    if (displayImages.length === 2) return ["center", "right"];
+    return ["center", "right", "left"];
+  });
 
   useEffect(() => {
-
     const interval = setInterval(() => {
-      nextImage()
-    }, 4000)
-
-    return () => clearInterval(interval)
-
-  }, [currentImage])
+      if (positions.length > 1) {
+        setPositions((prev) => [prev[prev.length - 1], ...prev.slice(0, prev.length - 1)]);
+      }
+    }, 2500);
+    return () => clearInterval(interval);
+  }, [positions]);
 
   if (!currentPlace) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-sand-dune">
-
-        <h1 className="text-3xl font-bold text-cyprus">
-          Place Not Found
-        </h1>
-
+        <h1 className="text-3xl font-bold text-cyprus">Place not found</h1>
       </div>
-    )
+    );
   }
 
+  const handleShuffle = () => {
+    if (positions.length > 1) {
+      setPositions((prev) => [prev[prev.length - 1], ...prev.slice(0, prev.length - 1)]);
+    }
+  };
+
+  const colors = ["bg-[#FAFAFA]", "bg-gray-50", "bg-gray-100"];
+
   return (
-    <div className="relative min-h-screen bg-sand-dune px-6 py-12 overflow-hidden isolate">
+    <div className="relative min-h-screen bg-sand-dune dark:bg-[#0C1519] px-6 py-12 overflow-hidden isolate transition-colors duration-300">
 
-      {/* Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      <ThemeToggle />
+      <BackgroundShapes />
 
-        <div className="absolute top-[40%] left-[5%] w-[800px] h-[600px] bg-[#C1E1C1] rounded-[50%_50%_20%_80%/50%_20%_80%_50%] blur-[40px] opacity-65 rotate-[45deg]" />
-
-        <div className="absolute bottom-[-15%] left-[-10%] w-[700px] h-[700px] bg-[#E6E6FA] rounded-[20%_80%_50%_50%/80%_50%_50%_20%] blur-[40px] opacity-70 -rotate-[30deg]" />
-
-      </div>
-
-      <div className="relative z-10 max-w-5xl mx-auto mt-20">
+      <div className="relative z-10 max-w-5xl mx-auto mt-4 md:mt-12">
 
         {/* Back Button */}
         <Link
           href="/lifestyle"
-          className="inline-flex items-center gap-2 text-cyprus hover:opacity-70 transition-opacity mb-10 group"
+          className="inline-flex items-center gap-2 text-cyprus dark:text-[#CF9D7B] px-4 py-2 -ml-4 rounded-full hover:bg-cyprus dark:hover:bg-[#CF9D7B] hover:text-[#FAFAFA] dark:hover:text-[#0C1519] transition-colors mb-10 group"
         >
 
           <ArrowLeft
@@ -345,109 +336,66 @@ export default function PlacePage() {
 
         </Link>
 
-        {/* Title */}
-        <div className="mb-10">
-
-          <h1 className="text-5xl font-black text-cyprus tracking-tight">
-            {currentPlace.title}
-          </h1>
-
-          <p className="mt-4 text-lg text-cyprus/70 leading-relaxed max-w-3xl">
-            {currentPlace.description}
-          </p>
-
-        </div>
-
-        {/* Carousel */}
-        <div className="relative w-full h-[420px] rounded-[2.5rem] overflow-hidden shadow-2xl border border-cyprus/10 mb-12">
-
-          {currentPlace.images.map((image: string, index: number) => (
-
-            <div
-              key={image}
-              className="absolute inset-0 transition-opacity duration-700"
-              style={{
-                opacity: currentImage === index ? 1 : 0
-              }}
-            >
-
-              <Image
-                src={image}
-                alt={currentPlace.title}
-                fill
-                className="object-cover"
-              />
-
-            </div>
-
-          ))}
-
-          {/* Left Button */}
-          <button
-            onClick={prevImage}
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 backdrop-blur-md text-white p-3 rounded-full hover:bg-black/50 transition"
-          >
-            ←
-          </button>
-
-          {/* Right Button */}
-          <button
-            onClick={nextImage}
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 backdrop-blur-md text-white p-3 rounded-full hover:bg-black/50 transition"
-          >
-            →
-          </button>
-
-          {/* Dots */}
-          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
-
-            {currentPlace.images.map((_: string, index: number) => (
-
-              <button
-                key={index}
-                onClick={() => setCurrentImage(index)}
-                className={`w-3 h-3 rounded-full transition ${
-                  currentImage === index
-                    ? "bg-white"
-                    : "bg-white/40"
-                }`}
-              />
-
-            ))}
-
+        {/* Info & Photos Shuffle */}
+        <div className="bg-[#FAFAFA] dark:bg-[#0C1519] border-2 border-cyprus dark:border-[#CF9D7B] p-8 md:p-12 rounded-[2.5rem] shadow-sm flex flex-col md:flex-row items-center gap-12 mb-12 animate-in fade-in slide-in-from-bottom duration-700 hover:bg-cyprus dark:hover:bg-[#CF9D7B] group transition-colors duration-300">
+          <div className="flex-1 w-full">
+            <h1 className="text-4xl md:text-5xl font-black text-cyprus dark:text-[#CF9D7B] group-hover:text-[#FAFAFA] dark:group-hover:text-[#0C1519] tracking-tight mb-6 transition-colors duration-300">
+              {currentPlace.title}
+            </h1>
+            <p className="text-cyprus/70 dark:text-[#CF9D7B]/70 group-hover:text-[#FAFAFA]/80 dark:group-hover:text-[#0C1519]/80 text-lg leading-relaxed transition-colors duration-300">
+              {currentPlace.description}
+            </p>
           </div>
 
+          {/* 3-Card Shuffle Side */}
+          <div 
+            className="relative w-full max-w-[280px] h-[180px] md:max-w-[320px] md:h-[220px] shrink-0 cursor-pointer mt-4 md:mt-0" 
+            onClick={handleShuffle}
+            title="Click to shuffle photos"
+          >
+            {displayImages.map((image: string, idx: number) => {
+              const pos = positions[idx];
+              let styles = "";
+              if (pos === "center") {
+                styles = "z-20 scale-100 translate-y-0 translate-x-0 opacity-100 shadow-xl";
+              } else if (pos === "right") {
+                styles = "z-10 scale-90 translate-x-8 md:translate-x-12 translate-y-4 md:translate-y-6 opacity-60 shadow-md";
+              } else {
+                styles = "z-10 scale-90 -translate-x-8 md:-translate-x-12 translate-y-4 md:translate-y-6 opacity-60 shadow-md";
+              }
+
+              return (
+                <div 
+                  key={image}
+                  className={`absolute top-0 left-0 w-full h-full rounded-2xl border overflow-hidden flex flex-col items-center justify-center transition-all duration-500 ease-in-out border-cyprus/10 dark:border-[#CF9D7B]/10 ${colors[idx] || "bg-[#FAFAFA]"} ${styles}`}
+                >
+                  <Image 
+                    src={image} 
+                    alt={currentPlace.title} 
+                    fill 
+                    className="object-cover" 
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Map */}
-        <div className="glass rounded-[2.5rem] p-6 border border-cyprus/10 shadow-xl">
-
-          <div className="flex items-center justify-center gap-3 mb-5">
-
-            <MapPin className="text-cyprus" />
-
-            <h2 className="text-2xl font-black text-cyprus uppercase">
-              Location
-            </h2>
-
-          </div>
-
-          <div className="overflow-hidden rounded-2xl">
-
+        {/* Map Embed */}
+        {currentPlace.map && (
+          <div className="w-full h-[400px] md:h-[500px] rounded-[2.5rem] overflow-hidden border-2 border-cyprus dark:border-[#CF9D7B] shadow-sm animate-in fade-in slide-in-from-bottom duration-700 delay-300 transition-colors duration-300">
             <iframe
               src={currentPlace.map}
               width="100%"
-              height="400"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen={false}
               loading="lazy"
-              className="border-0"
-            />
-
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
-
-        </div>
-
+        )}
       </div>
-
     </div>
-  )
+  );
 }

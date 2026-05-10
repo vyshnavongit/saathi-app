@@ -12,6 +12,8 @@ import {
   Plus,
   ChevronRight
 } from "lucide-react"
+import { ThemeToggle } from "../../components/ThemeToggle"
+import { BackgroundShapes } from "../../components/BackgroundShapes"
 
 export default function LifestylePage() {
 
@@ -133,23 +135,17 @@ export default function LifestylePage() {
   ]
 
   return (
-    <div className="relative min-h-screen bg-sand-dune px-6 py-12 overflow-hidden isolate">
+    <div className="relative min-h-screen bg-sand-dune dark:bg-[#0C1519] px-6 py-12 overflow-hidden isolate transition-colors duration-300">
 
-      {/* Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      <ThemeToggle />
+      <BackgroundShapes />
 
-        <div className="absolute top-[40%] left-[5%] w-[800px] h-[600px] bg-[#C1E1C1] rounded-[50%_50%_20%_80%/50%_20%_80%_50%] blur-[40px] opacity-65 rotate-[45deg]" />
-
-        <div className="absolute bottom-[-15%] left-[-10%] w-[700px] h-[700px] bg-[#E6E6FA] rounded-[20%_80%_50%_50%/80%_50%_50%_20%] blur-[40px] opacity-70 -rotate-[30deg]" />
-
-      </div>
-
-      <div className="relative z-10 max-w-4xl mx-auto mt-20">
+      <div className="relative z-10 max-w-4xl mx-auto mt-4 md:mt-12">
 
         {/* Back Button */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-cyprus hover:opacity-70 transition-opacity mb-10 group"
+          className="inline-flex items-center gap-2 text-cyprus dark:text-[#CF9D7B] px-4 py-2 -ml-4 rounded-full hover:bg-cyprus dark:hover:bg-[#CF9D7B] hover:text-[#FAFAFA] dark:hover:text-[#0C1519] transition-colors mb-10 group"
         >
 
           <ArrowLeft
@@ -166,11 +162,11 @@ export default function LifestylePage() {
         {/* Header */}
         <div className="text-center mb-16">
 
-          <h1 className="text-4xl md:text-5xl font-black text-cyprus tracking-tighter uppercase">
+          <h1 className="text-4xl md:text-5xl font-bold text-cyprus dark:text-[#CF9D7B] tracking-tight animate-in fade-in slide-in-from-top duration-700 transition-colors duration-300">
             Local Lifestyle
           </h1>
 
-          <p className="mt-4 text-cyprus/60 font-medium italic">
+          <p className="mt-4 text-cyprus/60 dark:text-[#CF9D7B]/60 font-medium animate-in fade-in slide-in-from-top duration-700 delay-150 transition-colors duration-300">
             Explore places, food, fitness and essentials around CUCEK
           </p>
 
@@ -183,23 +179,23 @@ export default function LifestylePage() {
 
             <div
               key={section.heading}
-              className="glass p-8 rounded-[2.5rem] border border-cyprus/10 shadow-xl animate-in fade-in slide-in-from-bottom duration-500"
+              className="bg-[#FAFAFA] dark:bg-[#0C1519] border-2 border-cyprus dark:border-[#CF9D7B] p-8 rounded-[2.5rem] shadow-sm animate-in fade-in slide-in-from-bottom duration-500 transition-colors duration-300"
               style={{ animationDelay: `${index * 100}ms` }}
             >
 
               {/* Section Heading */}
-              <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center gap-3 mb-6 border-b border-cyprus/10 dark:border-[#CF9D7B]/10 pb-4 transition-colors duration-300">
 
-                <div className="bg-cyprus/10 p-3 rounded-2xl">
+                <div className="bg-cyprus/10 dark:bg-[#CF9D7B]/10 p-2.5 rounded-2xl transition-colors duration-300">
 
                   <section.icon
-                    className="w-6 h-6 text-cyprus"
+                    className="w-5 h-5 text-cyprus"
                   />
 
                 </div>
 
-                <h2 className="text-2xl font-black text-cyprus uppercase tracking-tight">
-                  {section.heading}
+                <h2 className="text-2xl font-black text-cyprus dark:text-[#CF9D7B] tracking-[0.2em] transition-colors duration-300">
+                  {section.heading.toUpperCase()}
                 </h2>
 
               </div>
@@ -212,10 +208,10 @@ export default function LifestylePage() {
                   <Link
                     key={item.slug}
                     href={`/lifestyle/${item.slug}`}
-                    className="flex items-center justify-between bg-white/40 border border-cyprus/5 rounded-2xl px-5 py-4 hover:bg-cyprus hover:text-sand-dune transition-all duration-300 group"
+                    className="flex items-center justify-between bg-[#FAFAFA] dark:bg-[#0C1519] border-2 border-cyprus/20 dark:border-[#CF9D7B]/20 hover:border-cyprus dark:hover:border-[#CF9D7B] hover:bg-cyprus dark:hover:bg-[#CF9D7B] text-cyprus dark:text-[#CF9D7B] hover:text-[#FAFAFA] dark:hover:text-[#0C1519] rounded-2xl px-5 py-4 transition-all duration-300 shadow-sm hover:shadow-md group"
                   >
 
-                    <span className="font-semibold text-lg">
+                    <span className="font-bold text-lg">
                       {item.name}
                     </span>
 

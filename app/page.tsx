@@ -118,6 +118,7 @@ export default function HomePage() {
               </div>
             </Link>
           ))}
+
         </div>
 
         {/* 1 centered item at the bottom - Reduced Size */}
@@ -134,7 +135,9 @@ export default function HomePage() {
             </div>
           </Link>
         </div>
+
       </div>
+
     </div>
   )
 }

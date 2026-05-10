@@ -4,6 +4,8 @@
 import { useState } from "react"
 import Link from "next/link"
 import { BookOpen, ChevronRight, FileText, Home, Folder, Circle, Square, Triangle, Hexagon, Star, Download, ExternalLink, Eye, X } from "lucide-react"
+import { ThemeToggle } from "../../components/ThemeToggle"
+import { BackgroundShapes } from "../../components/BackgroundShapes"
 
 export default function AcademicsPage() {
   const [selectedSemester, setSelectedSemester] = useState<any>(null);
@@ -139,50 +141,26 @@ export default function AcademicsPage() {
   }
 
   return (
-    <div className="relative min-h-screen bg-sand-dune px-6 py-12 overflow-hidden isolate">
-      {/* Background blobs */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[40%] left-[5%] w-[800px] h-[600px] bg-[#C1E1C1] rounded-[50%_50%_20%_80%/50%_20%_80%_50%] filter blur-[40px] opacity-65 rotate-[45deg]" />
-        <div className="absolute bottom-[-15%] left-[-10%] w-[700px] h-[700px] bg-[#E6E6FA] rounded-[20%_80%_50%_50%/80%_50%_50%_20%] filter blur-[40px] opacity-70 -rotate-[30deg]" />
-        
-        {/* Random Floating Elements (No fill, 50% opacity) */}
-        <Circle className="absolute top-[15%] left-[10%] w-12 h-12 text-cyprus opacity-50 -rotate-12" strokeWidth={1.5} />
-        <Triangle className="absolute top-[25%] right-[15%] w-16 h-16 text-cyprus opacity-50 rotate-45" strokeWidth={1.5} />
-        <Square className="absolute bottom-[20%] left-[15%] w-10 h-10 text-cyprus opacity-50 rotate-12" strokeWidth={1.5} />
-        <Hexagon className="absolute bottom-[30%] right-[10%] w-14 h-14 text-cyprus opacity-50 rotate-[60deg]" strokeWidth={1.5} />
-        <Star className="absolute top-[50%] left-[4%] w-8 h-8 text-cyprus opacity-50 -rotate-45" strokeWidth={1.5} />
-        <Circle className="absolute top-[60%] right-[5%] w-6 h-6 text-cyprus opacity-50 rotate-90" strokeWidth={1.5} />
-        <Triangle className="absolute bottom-[10%] right-[30%] w-8 h-8 text-cyprus opacity-50 -rotate-[30deg]" strokeWidth={1.5} />
-        <Square className="absolute top-[10%] right-[40%] w-5 h-5 text-cyprus opacity-50 rotate-12" strokeWidth={1.5} />
-        
-        {/* Additional 10 elements */}
-        <Hexagon className="absolute top-[5%] right-[25%] w-7 h-7 text-cyprus opacity-50 rotate-[15deg]" strokeWidth={1.5} />
-        <Star className="absolute bottom-[40%] left-[20%] w-10 h-10 text-cyprus opacity-50 rotate-180" strokeWidth={1.5} />
-        <Circle className="absolute top-[35%] left-[40%] w-5 h-5 text-cyprus opacity-50 -rotate-90" strokeWidth={1.5} />
-        <Triangle className="absolute bottom-[15%] left-[45%] w-12 h-12 text-cyprus opacity-50 rotate-[75deg]" strokeWidth={1.5} />
-        <Square className="absolute top-[45%] right-[20%] w-8 h-8 text-cyprus opacity-50 rotate-45" strokeWidth={1.5} />
-        <Hexagon className="absolute bottom-[5%] left-[5%] w-16 h-16 text-cyprus opacity-50 -rotate-12" strokeWidth={1.5} />
-        <Star className="absolute top-[80%] right-[15%] w-12 h-12 text-cyprus opacity-50 rotate-[120deg]" strokeWidth={1.5} />
-        <Circle className="absolute top-[10%] left-[60%] w-14 h-14 text-cyprus opacity-50 rotate-[30deg]" strokeWidth={1.5} />
-        <Triangle className="absolute top-[75%] left-[30%] w-6 h-6 text-cyprus opacity-50 rotate-[-60deg]" strokeWidth={1.5} />
-        <Square className="absolute bottom-[40%] right-[45%] w-9 h-9 text-cyprus opacity-50 rotate-[-15deg]" strokeWidth={1.5} />
-      </div>
+    <div className="relative min-h-screen bg-sand-dune dark:bg-[#0C1519] px-6 py-12 overflow-hidden isolate transition-colors duration-300">
+      
+      <ThemeToggle />
+      <BackgroundShapes />
 
       <div className="relative z-10 max-w-4xl mx-auto mt-4 md:mt-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-cyprus mb-8 text-center tracking-tight animate-in fade-in slide-in-from-top duration-700">
+        <h1 className="text-4xl md:text-5xl font-bold text-cyprus dark:text-[#CF9D7B] mb-8 text-center tracking-tight animate-in fade-in slide-in-from-top duration-700 transition-colors duration-300">
           Academics
         </h1>
 
         {/* Directory Bar */}
-        <div className="flex items-center flex-wrap gap-2 text-cyprus/80 mb-10 bg-[#FAFAFA] p-4 rounded-2xl border-2 border-cyprus shadow-sm animate-in fade-in slide-in-from-top-4">
-          <Link href="/" className="hover:text-cyprus transition-colors flex items-center gap-1">
+        <div className="flex items-center flex-wrap gap-2 text-cyprus/80 dark:text-[#CF9D7B]/80 mb-10 bg-[#FAFAFA] dark:bg-[#0C1519] p-4 rounded-2xl border-2 border-cyprus dark:border-[#CF9D7B] shadow-sm animate-in fade-in slide-in-from-top-4 transition-colors duration-300">
+          <Link href="/" className="hover:text-cyprus dark:hover:text-[#CF9D7B] transition-colors flex items-center gap-1">
             <Home className="w-4 h-4" />
             <span className="text-sm font-medium">Home</span>
           </Link>
           <ChevronRight className="w-4 h-4 opacity-50" />
           <button 
             onClick={() => { setSelectedSemester(null); setSelectedStream(null); setSelectedBranch(null); setSelectedContentType(null); setSelectedPyqType(null); setSelectedSubject(null); setSelectedModule(null); }}
-            className={`hover:text-cyprus transition-colors flex items-center gap-1 text-sm font-medium ${!selectedSemester ? 'text-cyprus font-bold' : ''}`}
+            className={`hover:text-cyprus dark:hover:text-[#CF9D7B] transition-colors flex items-center gap-1 text-sm font-medium ${!selectedSemester ? 'text-cyprus dark:text-[#CF9D7B] font-bold' : ''}`}
           >
             <Folder className="w-4 h-4" />
             Academics
@@ -193,7 +171,7 @@ export default function AcademicsPage() {
               <ChevronRight className="w-4 h-4 opacity-50" />
               <button 
                 onClick={() => { setSelectedStream(null); setSelectedBranch(null); setSelectedContentType(null); setSelectedPyqType(null); setSelectedSubject(null); setSelectedModule(null); }}
-                className={`hover:text-cyprus transition-colors flex items-center gap-1 text-sm font-medium ${!selectedBranch && !selectedStream ? 'text-cyprus font-bold' : ''}`}
+                className={`hover:text-cyprus dark:hover:text-[#CF9D7B] transition-colors flex items-center gap-1 text-sm font-medium ${!selectedBranch && !selectedStream ? 'text-cyprus dark:text-[#CF9D7B] font-bold' : ''}`}
               >
                 <Folder className="w-4 h-4" />
                 {selectedSemester.name}
@@ -206,7 +184,7 @@ export default function AcademicsPage() {
               <ChevronRight className="w-4 h-4 opacity-50" />
               <button 
                 onClick={() => { setSelectedBranch(null); setSelectedContentType(null); setSelectedPyqType(null); setSelectedSubject(null); setSelectedModule(null); }}
-                className={`hover:text-cyprus transition-colors flex items-center gap-1 text-sm font-medium ${!selectedBranch ? 'text-cyprus font-bold' : ''}`}
+                className={`hover:text-cyprus dark:hover:text-[#CF9D7B] transition-colors flex items-center gap-1 text-sm font-medium ${!selectedBranch ? 'text-cyprus dark:text-[#CF9D7B] font-bold' : ''}`}
               >
                 <Folder className="w-4 h-4" />
                 {selectedStream.name}
@@ -219,7 +197,7 @@ export default function AcademicsPage() {
               <ChevronRight className="w-4 h-4 opacity-50" />
               <button 
                 onClick={() => { setSelectedContentType(null); setSelectedPyqType(null); setSelectedSubject(null); setSelectedModule(null); }}
-                className={`hover:text-cyprus transition-colors flex items-center gap-1 text-sm font-medium ${!selectedContentType ? 'text-cyprus font-bold' : ''}`}
+                className={`hover:text-cyprus dark:hover:text-[#CF9D7B] transition-colors flex items-center gap-1 text-sm font-medium ${!selectedContentType ? 'text-cyprus dark:text-[#CF9D7B] font-bold' : ''}`}
               >
                 <Folder className="w-4 h-4" />
                 {selectedBranch.name}
@@ -232,7 +210,7 @@ export default function AcademicsPage() {
               <ChevronRight className="w-4 h-4 opacity-50" />
               <button 
                 onClick={() => { setSelectedPyqType(null); setSelectedSubject(null); setSelectedModule(null); }}
-                className={`hover:text-cyprus transition-colors flex items-center gap-1 text-sm font-medium ${!selectedPyqType && !selectedSubject ? 'text-cyprus font-bold' : ''}`}
+                className={`hover:text-cyprus dark:hover:text-[#CF9D7B] transition-colors flex items-center gap-1 text-sm font-medium ${!selectedPyqType && !selectedSubject ? 'text-cyprus dark:text-[#CF9D7B] font-bold' : ''}`}
               >
                 <Folder className="w-4 h-4" />
                 {selectedContentType}
@@ -243,7 +221,7 @@ export default function AcademicsPage() {
           {selectedPyqType && (
             <>
               <ChevronRight className="w-4 h-4 opacity-50" />
-              <span className="text-cyprus font-bold flex items-center gap-1 text-sm">
+              <span className="text-cyprus dark:text-[#CF9D7B] font-bold flex items-center gap-1 text-sm">
                 <Folder className="w-4 h-4" />
                 {selectedPyqType}
               </span>
@@ -255,7 +233,7 @@ export default function AcademicsPage() {
               <ChevronRight className="w-4 h-4 opacity-50" />
               <button 
                 onClick={() => setSelectedModule(null)}
-                className={`hover:text-cyprus transition-colors flex items-center gap-1 text-sm font-medium ${!selectedModule ? 'text-cyprus font-bold' : ''}`}
+                className={`hover:text-cyprus dark:hover:text-[#CF9D7B] transition-colors flex items-center gap-1 text-sm font-medium ${!selectedModule ? 'text-cyprus dark:text-[#CF9D7B] font-bold' : ''}`}
               >
                 <Folder className="w-4 h-4" />
                 <span className="max-w-[150px] md:max-w-[300px] truncate">{selectedSubject}</span>
@@ -266,7 +244,7 @@ export default function AcademicsPage() {
           {selectedModule && (
             <>
               <ChevronRight className="w-4 h-4 opacity-50" />
-              <span className="text-cyprus font-bold flex items-center gap-1 text-sm">
+              <span className="text-cyprus dark:text-[#CF9D7B] font-bold flex items-center gap-1 text-sm">
                 <Folder className="w-4 h-4" />
                 {selectedModule}
               </span>
@@ -281,10 +259,10 @@ export default function AcademicsPage() {
               {semesters.map((sem) => (
                 <div 
                   key={sem.id} 
-                  className="group p-4 md:p-5 rounded-2xl transition-all duration-300 flex flex-col items-center text-center gap-3 border-2 border-cyprus bg-[#FAFAFA] text-cyprus hover:bg-cyprus hover:text-[#FAFAFA] shadow-sm hover:shadow-md cursor-pointer"
+                  className="group p-4 md:p-5 rounded-2xl transition-all duration-300 flex flex-col items-center text-center gap-3 border-2 border-cyprus dark:border-[#CF9D7B] bg-[#FAFAFA] dark:bg-[#0C1519] text-cyprus dark:text-[#CF9D7B] hover:bg-cyprus dark:hover:bg-[#CF9D7B] hover:text-[#FAFAFA] dark:hover:text-[#0C1519] shadow-sm hover:shadow-md cursor-pointer"
                   onClick={() => setSelectedSemester(sem)}
                 >
-                  <div className="bg-cyprus/10 group-hover:bg-[#FAFAFA] group-hover:text-cyprus p-4 rounded-xl transition-colors duration-300">
+                  <div className="bg-cyprus/10 dark:bg-[#CF9D7B]/10 group-hover:bg-[#FAFAFA] dark:group-hover:bg-[#0C1519] group-hover:text-cyprus dark:group-hover:text-[#CF9D7B] p-4 rounded-xl transition-colors duration-300">
                     <BookOpen className="w-8 h-8" />
                   </div>
                   <h2 className="text-xl font-bold">{sem.name}</h2>
@@ -299,11 +277,11 @@ export default function AcademicsPage() {
               {streams.map((stream) => (
                  <div 
                    key={stream.id}
-                   className="group p-4 rounded-xl transition-all duration-300 flex items-center justify-between border-2 border-cyprus bg-[#FAFAFA] text-cyprus hover:bg-cyprus hover:text-[#FAFAFA] shadow-sm hover:shadow-md cursor-pointer"
+                   className="group p-4 rounded-xl transition-all duration-300 flex items-center justify-between border-2 border-cyprus dark:border-[#CF9D7B] bg-[#FAFAFA] dark:bg-[#0C1519] text-cyprus dark:text-[#CF9D7B] hover:bg-cyprus dark:hover:bg-[#CF9D7B] hover:text-[#FAFAFA] dark:hover:text-[#0C1519] shadow-sm hover:shadow-md cursor-pointer"
                    onClick={() => setSelectedStream(stream)}
                  >
                    <div className="flex items-center gap-3">
-                     <div className="bg-cyprus/10 group-hover:bg-[#FAFAFA] group-hover:text-cyprus p-2.5 rounded-lg transition-colors duration-300">
+                     <div className="bg-cyprus/10 dark:bg-[#CF9D7B]/10 group-hover:bg-[#FAFAFA] dark:group-hover:bg-[#0C1519] group-hover:text-cyprus dark:group-hover:text-[#CF9D7B] p-2.5 rounded-lg transition-colors duration-300">
                         <Folder className="w-5 h-5" />
                      </div>
                      <span className="font-bold text-base text-left">{stream.name}</span>
@@ -321,11 +299,11 @@ export default function AcademicsPage() {
               {(selectedStream ? selectedStream.branches : branches).map((branch: any) => (
                  <div 
                    key={branch.id}
-                   className="group p-4 rounded-xl transition-all duration-300 flex items-center justify-between border-2 border-cyprus bg-[#FAFAFA] text-cyprus hover:bg-cyprus hover:text-[#FAFAFA] shadow-sm hover:shadow-md cursor-pointer"
+                   className="group p-4 rounded-xl transition-all duration-300 flex items-center justify-between border-2 border-cyprus dark:border-[#CF9D7B] bg-[#FAFAFA] dark:bg-[#0C1519] text-cyprus dark:text-[#CF9D7B] hover:bg-cyprus dark:hover:bg-[#CF9D7B] hover:text-[#FAFAFA] dark:hover:text-[#0C1519] shadow-sm hover:shadow-md cursor-pointer"
                    onClick={() => setSelectedBranch(branch)}
                  >
                    <div className="flex items-center gap-3">
-                     <div className="bg-cyprus/10 group-hover:bg-[#FAFAFA] group-hover:text-cyprus p-2.5 rounded-lg transition-colors duration-300">
+                     <div className="bg-cyprus/10 dark:bg-[#CF9D7B]/10 group-hover:bg-[#FAFAFA] dark:group-hover:bg-[#0C1519] group-hover:text-cyprus dark:group-hover:text-[#CF9D7B] p-2.5 rounded-lg transition-colors duration-300">
                         <Folder className="w-5 h-5" />
                      </div>
                      <span className="font-bold text-base text-left">{branch.name}</span>
@@ -342,10 +320,10 @@ export default function AcademicsPage() {
               {["Notes", "Record", "PYQ"].map((type) => (
                 <div 
                   key={type}
-                  className="group p-5 rounded-2xl transition-all duration-300 flex flex-col items-center justify-center gap-3 border-2 border-cyprus bg-[#FAFAFA] text-cyprus hover:bg-cyprus hover:text-[#FAFAFA] shadow-sm hover:shadow-md cursor-pointer text-center"
+                  className="group p-5 rounded-2xl transition-all duration-300 flex flex-col items-center justify-center gap-3 border-2 border-cyprus dark:border-[#CF9D7B] bg-[#FAFAFA] dark:bg-[#0C1519] text-cyprus dark:text-[#CF9D7B] hover:bg-cyprus dark:hover:bg-[#CF9D7B] hover:text-[#FAFAFA] dark:hover:text-[#0C1519] shadow-sm hover:shadow-md cursor-pointer text-center"
                   onClick={() => setSelectedContentType(type)}
                 >
-                  <div className="bg-cyprus/10 group-hover:bg-[#FAFAFA] group-hover:text-cyprus p-4 rounded-xl transition-colors duration-300">
+                  <div className="bg-cyprus/10 dark:bg-[#CF9D7B]/10 group-hover:bg-[#FAFAFA] dark:group-hover:bg-[#0C1519] group-hover:text-cyprus dark:group-hover:text-[#CF9D7B] p-4 rounded-xl transition-colors duration-300">
                     <Folder className="w-8 h-8" />
                   </div>
                   <span className="font-bold text-xl">{type}</span>
@@ -362,19 +340,19 @@ export default function AcademicsPage() {
                   <div 
                     key={idx} 
                     onClick={() => setSelectedSubject(sub)}
-                    className="group p-3 rounded-xl flex items-center gap-3 border-2 border-cyprus bg-[#FAFAFA] text-cyprus hover:bg-cyprus hover:text-[#FAFAFA] shadow-sm hover:shadow-md transition-all cursor-pointer"
+                    className="group p-3 rounded-xl flex items-center gap-3 border-2 border-cyprus dark:border-[#CF9D7B] bg-[#FAFAFA] dark:bg-[#0C1519] text-cyprus dark:text-[#CF9D7B] hover:bg-cyprus dark:hover:bg-[#CF9D7B] hover:text-[#FAFAFA] dark:hover:text-[#0C1519] shadow-sm hover:shadow-md transition-all cursor-pointer"
                   >
-                    <div className="bg-cyprus/10 group-hover:bg-[#FAFAFA] group-hover:text-cyprus p-2.5 rounded-lg shrink-0 transition-colors">
+                    <div className="bg-cyprus/10 dark:bg-[#CF9D7B]/10 group-hover:bg-[#FAFAFA] dark:group-hover:bg-[#0C1519] group-hover:text-cyprus dark:group-hover:text-[#CF9D7B] p-2.5 rounded-lg shrink-0 transition-colors">
                        <FileText className="w-5 h-5" />
                     </div>
                     <span className="font-semibold leading-tight text-sm opacity-90 group-hover:opacity-100">{sub}</span>
                   </div>
                 ))
               ) : (
-                <div className="col-span-full p-8 rounded-2xl border-2 border-cyprus bg-[#FAFAFA] shadow-sm flex flex-col items-center justify-center animate-in fade-in zoom-in-95 duration-500">
-                   <FileText className="w-12 h-12 mb-3 text-cyprus/40" />
-                   <h3 className="text-xl font-bold text-cyprus mb-2 text-center">No Subjects Found</h3>
-                   <p className="text-cyprus/60 font-medium text-center">No subjects mapped to {selectedContentType} for this semester yet.</p>
+                <div className="col-span-full p-8 rounded-2xl border-2 border-cyprus dark:border-[#CF9D7B] bg-[#FAFAFA] dark:bg-[#0C1519] shadow-sm flex flex-col items-center justify-center animate-in fade-in zoom-in-95 duration-500 transition-colors duration-300">
+                   <FileText className="w-12 h-12 mb-3 text-cyprus/40 dark:text-[#CF9D7B]/40" />
+                   <h3 className="text-xl font-bold text-cyprus dark:text-[#CF9D7B] mb-2 text-center">No Subjects Found</h3>
+                   <p className="text-cyprus/60 dark:text-[#CF9D7B]/60 font-medium text-center">No subjects mapped to {selectedContentType} for this semester yet.</p>
                 </div>
               )}
             </div>
@@ -386,11 +364,11 @@ export default function AcademicsPage() {
               {["Module 1", "Module 2", "Module 3", "Module 4"].map((mod) => (
                 <div 
                   key={mod}
-                  className="group p-4 rounded-xl transition-all duration-300 flex items-center justify-between border-2 border-cyprus bg-[#FAFAFA] text-cyprus hover:bg-cyprus hover:text-[#FAFAFA] shadow-sm hover:shadow-md cursor-pointer"
+                  className="group p-4 rounded-xl transition-all duration-300 flex items-center justify-between border-2 border-cyprus dark:border-[#CF9D7B] bg-[#FAFAFA] dark:bg-[#0C1519] text-cyprus dark:text-[#CF9D7B] hover:bg-cyprus dark:hover:bg-[#CF9D7B] hover:text-[#FAFAFA] dark:hover:text-[#0C1519] shadow-sm hover:shadow-md cursor-pointer"
                   onClick={() => setSelectedModule(mod)}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="bg-cyprus/10 group-hover:bg-[#FAFAFA] group-hover:text-cyprus p-2.5 rounded-lg transition-colors duration-300">
+                    <div className="bg-cyprus/10 dark:bg-[#CF9D7B]/10 group-hover:bg-[#FAFAFA] dark:group-hover:bg-[#0C1519] group-hover:text-cyprus dark:group-hover:text-[#CF9D7B] p-2.5 rounded-lg transition-colors duration-300">
                        <Folder className="w-5 h-5" />
                     </div>
                     <span className="font-bold text-base">{mod}</span>
@@ -404,35 +382,35 @@ export default function AcademicsPage() {
           {/* Module Content / Empty State */}
           {selectedContentType === 'Notes' && selectedModule && (
             <div className="animate-in fade-in zoom-in-95 duration-500 flex flex-col gap-6">
-              <div className="bg-[#FAFAFA] p-5 md:p-6 rounded-2xl border-2 border-cyprus shadow-sm">
-                <h3 className="text-xl font-bold text-cyprus mb-1">{selectedModule}</h3>
-                <p className="text-cyprus/70 text-sm font-medium">View notes for {selectedSubject}.</p>
+              <div className="bg-[#FAFAFA] dark:bg-[#0C1519] p-5 md:p-6 rounded-2xl border-2 border-cyprus dark:border-[#CF9D7B] shadow-sm transition-colors duration-300">
+                <h3 className="text-xl font-bold text-cyprus dark:text-[#CF9D7B] mb-1">{selectedModule}</h3>
+                <p className="text-cyprus/70 dark:text-[#CF9D7B]/70 text-sm font-medium">View notes for {selectedSubject}.</p>
               </div>
 
               {/* Live Files Layout */}
               {documentFiles.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {documentFiles.map((file) => (
-                    <div key={file.id} className="group p-4 bg-[#FAFAFA] border-2 border-cyprus/20 hover:border-cyprus rounded-xl transition-all shadow-sm hover:shadow-md flex flex-col gap-4">
+                    <div key={file.id} className="group p-4 bg-[#FAFAFA] dark:bg-[#0C1519] border-2 border-cyprus/20 dark:border-[#CF9D7B]/20 hover:border-cyprus dark:hover:border-[#CF9D7B] rounded-xl transition-all shadow-sm hover:shadow-md flex flex-col gap-4">
                       <div className="flex items-center gap-4 overflow-hidden">
-                        <div className="p-3 bg-cyprus/10 text-cyprus rounded-lg transition-colors shrink-0">
+                        <div className="p-3 bg-cyprus/10 dark:bg-[#CF9D7B]/10 text-cyprus dark:text-[#CF9D7B] rounded-lg transition-colors shrink-0">
                           <FileText className="w-6 h-6" />
                         </div>
                         <div className="truncate flex-1">
-                          <h4 className="font-bold text-cyprus text-sm truncate">{file.name}</h4>
-                          <span className="text-xs text-cyprus/60 font-medium">{file.date} • {file.size}</span>
+                          <h4 className="font-bold text-cyprus dark:text-[#CF9D7B] text-sm truncate">{file.name}</h4>
+                          <span className="text-xs text-cyprus/60 dark:text-[#CF9D7B]/60 font-medium">{file.date} • {file.size}</span>
                         </div>
                       </div>
-                      <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-cyprus/10">
-                        <button onClick={() => setViewingFile(file)} className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-[#FAFAFA] bg-cyprus hover:bg-opacity-90 transition-colors">
+                      <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-cyprus/10 dark:border-[#CF9D7B]/10">
+                        <button onClick={() => setViewingFile(file)} className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-[#FAFAFA] dark:text-[#0C1519] bg-cyprus dark:bg-[#CF9D7B] hover:opacity-90 transition-colors">
                           <Eye className="w-4 h-4" />
                           Read
                         </button>
-                        <a href={file.driveUrl} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-cyprus bg-cyprus/5 hover:bg-cyprus/10 transition-colors">
+                        <a href={file.driveUrl} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-cyprus dark:text-[#CF9D7B] bg-cyprus/5 dark:bg-[#CF9D7B]/5 hover:bg-cyprus/10 dark:hover:bg-[#CF9D7B]/10 transition-colors">
                            <ExternalLink className="w-4 h-4" />
                            Drive
                          </a>
-                         <a href={file.downloadUrl} target="_blank" rel="noopener noreferrer" download className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-cyprus bg-cyprus/5 hover:bg-cyprus/10 transition-colors">
+                         <a href={file.downloadUrl} target="_blank" rel="noopener noreferrer" download className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-cyprus dark:text-[#CF9D7B] bg-cyprus/5 dark:bg-[#CF9D7B]/5 hover:bg-cyprus/10 dark:hover:bg-[#CF9D7B]/10 transition-colors">
                            <Download className="w-4 h-4" />
                            Save
                          </a>
@@ -441,10 +419,10 @@ export default function AcademicsPage() {
                   ))}
                 </div>
               ) : (
-                <div className="p-8 rounded-2xl border-2 border-cyprus/20 border-dashed bg-[#FAFAFA] shadow-sm flex flex-col items-center justify-center">
-                  <FileText className="w-12 h-12 mb-3 text-cyprus/30" />
-                  <h3 className="text-lg font-bold text-cyprus mb-1 text-center">No Files Available</h3>
-                  <p className="text-cyprus/60 font-medium text-center text-sm">Notes for {selectedModule} will appear here.</p>
+                <div className="p-8 rounded-2xl border-2 border-cyprus/20 dark:border-[#CF9D7B]/20 border-dashed bg-[#FAFAFA] dark:bg-[#0C1519] shadow-sm flex flex-col items-center justify-center transition-colors duration-300">
+                  <FileText className="w-12 h-12 mb-3 text-cyprus/30 dark:text-[#CF9D7B]/30" />
+                  <h3 className="text-lg font-bold text-cyprus dark:text-[#CF9D7B] mb-1 text-center">No Files Available</h3>
+                  <p className="text-cyprus/60 dark:text-[#CF9D7B]/60 font-medium text-center text-sm">Notes for {selectedModule} will appear here.</p>
                 </div>
               )}
             </div>
@@ -453,35 +431,35 @@ export default function AcademicsPage() {
           {/* Record Files (Directly inside Subject) */}
           {selectedContentType === 'Record' && selectedSubject && (
             <div className="animate-in fade-in zoom-in-95 duration-500 flex flex-col gap-6">
-              <div className="bg-[#FAFAFA] p-5 md:p-6 rounded-2xl border-2 border-cyprus shadow-sm">
-                <h3 className="text-xl font-bold text-cyprus mb-1">{selectedSubject}</h3>
-                <p className="text-cyprus/70 text-sm font-medium">View record documents for {selectedSubject}.</p>
+              <div className="bg-[#FAFAFA] dark:bg-[#0C1519] p-5 md:p-6 rounded-2xl border-2 border-cyprus dark:border-[#CF9D7B] shadow-sm transition-colors duration-300">
+                <h3 className="text-xl font-bold text-cyprus dark:text-[#CF9D7B] mb-1">{selectedSubject}</h3>
+                <p className="text-cyprus/70 dark:text-[#CF9D7B]/70 text-sm font-medium">View record documents for {selectedSubject}.</p>
               </div>
 
               {/* Live Files Layout */}
               {documentFiles.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {documentFiles.map((file) => (
-                    <div key={file.id} className="group p-4 bg-[#FAFAFA] border-2 border-cyprus/20 hover:border-cyprus rounded-xl transition-all shadow-sm hover:shadow-md flex flex-col gap-4">
+                    <div key={file.id} className="group p-4 bg-[#FAFAFA] dark:bg-[#0C1519] border-2 border-cyprus/20 dark:border-[#CF9D7B]/20 hover:border-cyprus dark:hover:border-[#CF9D7B] rounded-xl transition-all shadow-sm hover:shadow-md flex flex-col gap-4">
                       <div className="flex items-center gap-4 overflow-hidden">
-                        <div className="p-3 bg-cyprus/10 text-cyprus rounded-lg transition-colors shrink-0">
+                        <div className="p-3 bg-cyprus/10 dark:bg-[#CF9D7B]/10 text-cyprus dark:text-[#CF9D7B] rounded-lg transition-colors shrink-0">
                           <FileText className="w-6 h-6" />
                         </div>
                         <div className="truncate flex-1">
-                          <h4 className="font-bold text-cyprus text-sm truncate">{file.name}</h4>
-                          <span className="text-xs text-cyprus/60 font-medium">{file.date} • {file.size}</span>
+                          <h4 className="font-bold text-cyprus dark:text-[#CF9D7B] text-sm truncate">{file.name}</h4>
+                          <span className="text-xs text-cyprus/60 dark:text-[#CF9D7B]/60 font-medium">{file.date} • {file.size}</span>
                         </div>
                       </div>
-                      <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-cyprus/10">
-                        <button onClick={() => setViewingFile(file)} className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-[#FAFAFA] bg-cyprus hover:bg-opacity-90 transition-colors">
+                      <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-cyprus/10 dark:border-[#CF9D7B]/10">
+                        <button onClick={() => setViewingFile(file)} className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-[#FAFAFA] dark:text-[#0C1519] bg-cyprus dark:bg-[#CF9D7B] hover:opacity-90 transition-colors">
                           <Eye className="w-4 h-4" />
                           Read
                         </button>
-                        <a href={file.driveUrl} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-cyprus bg-cyprus/5 hover:bg-cyprus/10 transition-colors">
+                        <a href={file.driveUrl} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-cyprus dark:text-[#CF9D7B] bg-cyprus/5 dark:bg-[#CF9D7B]/5 hover:bg-cyprus/10 dark:hover:bg-[#CF9D7B]/10 transition-colors">
                            <ExternalLink className="w-4 h-4" />
                            Drive
                          </a>
-                         <a href={file.downloadUrl} target="_blank" rel="noopener noreferrer" download className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-cyprus bg-cyprus/5 hover:bg-cyprus/10 transition-colors">
+                         <a href={file.downloadUrl} target="_blank" rel="noopener noreferrer" download className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-cyprus dark:text-[#CF9D7B] bg-cyprus/5 dark:bg-[#CF9D7B]/5 hover:bg-cyprus/10 dark:hover:bg-[#CF9D7B]/10 transition-colors">
                            <Download className="w-4 h-4" />
                            Save
                          </a>
@@ -490,10 +468,10 @@ export default function AcademicsPage() {
                   ))}
                 </div>
               ) : (
-                <div className="p-8 rounded-2xl border-2 border-cyprus/20 border-dashed bg-[#FAFAFA] shadow-sm flex flex-col items-center justify-center">
-                  <FileText className="w-12 h-12 mb-3 text-cyprus/30" />
-                  <h3 className="text-lg font-bold text-cyprus mb-1 text-center">No Files Available</h3>
-                  <p className="text-cyprus/60 font-medium text-center text-sm">Records for {selectedSubject} will appear here.</p>
+                <div className="p-8 rounded-2xl border-2 border-cyprus/20 dark:border-[#CF9D7B]/20 border-dashed bg-[#FAFAFA] dark:bg-[#0C1519] shadow-sm flex flex-col items-center justify-center transition-colors duration-300">
+                  <FileText className="w-12 h-12 mb-3 text-cyprus/30 dark:text-[#CF9D7B]/30" />
+                  <h3 className="text-lg font-bold text-cyprus dark:text-[#CF9D7B] mb-1 text-center">No Files Available</h3>
+                  <p className="text-cyprus/60 dark:text-[#CF9D7B]/60 font-medium text-center text-sm">Records for {selectedSubject} will appear here.</p>
                 </div>
               )}
             </div>
@@ -505,11 +483,11 @@ export default function AcademicsPage() {
               {["Internals", "Externals"].map((type) => (
                 <div 
                   key={type}
-                  className="group p-4 rounded-xl transition-all duration-300 flex items-center justify-between border-2 border-cyprus bg-[#FAFAFA] text-cyprus hover:bg-cyprus hover:text-[#FAFAFA] shadow-sm hover:shadow-md cursor-pointer"
+                  className="group p-4 rounded-xl transition-all duration-300 flex items-center justify-between border-2 border-cyprus dark:border-[#CF9D7B] bg-[#FAFAFA] dark:bg-[#0C1519] text-cyprus dark:text-[#CF9D7B] hover:bg-cyprus dark:hover:bg-[#CF9D7B] hover:text-[#FAFAFA] dark:hover:text-[#0C1519] shadow-sm hover:shadow-md cursor-pointer"
                   onClick={() => setSelectedPyqType(type)}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="bg-cyprus/10 group-hover:bg-[#FAFAFA] group-hover:text-cyprus p-2.5 rounded-lg transition-colors duration-300">
+                    <div className="bg-cyprus/10 dark:bg-[#CF9D7B]/10 group-hover:bg-[#FAFAFA] dark:group-hover:bg-[#0C1519] group-hover:text-cyprus dark:group-hover:text-[#CF9D7B] p-2.5 rounded-lg transition-colors duration-300">
                        <Folder className="w-5 h-5" />
                     </div>
                     <span className="font-bold text-base">{type}</span>
@@ -523,35 +501,35 @@ export default function AcademicsPage() {
           {/* PYQ Files / Empty State */}
           {selectedPyqType && (
             <div className="animate-in fade-in zoom-in-95 duration-500 flex flex-col gap-6">
-              <div className="bg-[#FAFAFA] p-5 md:p-6 rounded-2xl border-2 border-cyprus shadow-sm">
-                <h3 className="text-xl font-bold text-cyprus mb-1">{selectedPyqType}</h3>
-                <p className="text-cyprus/70 text-sm font-medium">View PYQ documents for {selectedBranch?.name}.</p>
+              <div className="bg-[#FAFAFA] dark:bg-[#0C1519] p-5 md:p-6 rounded-2xl border-2 border-cyprus dark:border-[#CF9D7B] shadow-sm transition-colors duration-300">
+                <h3 className="text-xl font-bold text-cyprus dark:text-[#CF9D7B] mb-1">{selectedPyqType}</h3>
+                <p className="text-cyprus/70 dark:text-[#CF9D7B]/70 text-sm font-medium">View PYQ documents for {selectedBranch?.name}.</p>
               </div>
 
               {/* Live Files Layout */}
               {documentFiles.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {documentFiles.map((file) => (
-                    <div key={file.id} className="group p-4 bg-[#FAFAFA] border-2 border-cyprus/20 hover:border-cyprus rounded-xl transition-all shadow-sm hover:shadow-md flex flex-col gap-4">
+                    <div key={file.id} className="group p-4 bg-[#FAFAFA] dark:bg-[#0C1519] border-2 border-cyprus/20 dark:border-[#CF9D7B]/20 hover:border-cyprus dark:hover:border-[#CF9D7B] rounded-xl transition-all shadow-sm hover:shadow-md flex flex-col gap-4">
                       <div className="flex items-center gap-4 overflow-hidden">
-                        <div className="p-3 bg-cyprus/10 text-cyprus rounded-lg transition-colors shrink-0">
+                        <div className="p-3 bg-cyprus/10 dark:bg-[#CF9D7B]/10 text-cyprus dark:text-[#CF9D7B] rounded-lg transition-colors shrink-0">
                           <FileText className="w-6 h-6" />
                         </div>
                         <div className="truncate flex-1">
-                          <h4 className="font-bold text-cyprus text-sm truncate">{file.name}</h4>
-                          <span className="text-xs text-cyprus/60 font-medium">{file.date} • {file.size}</span>
+                          <h4 className="font-bold text-cyprus dark:text-[#CF9D7B] text-sm truncate">{file.name}</h4>
+                          <span className="text-xs text-cyprus/60 dark:text-[#CF9D7B]/60 font-medium">{file.date} • {file.size}</span>
                         </div>
                       </div>
-                      <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-cyprus/10">
-                        <button onClick={() => setViewingFile(file)} className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-[#FAFAFA] bg-cyprus hover:bg-opacity-90 transition-colors">
+                      <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-cyprus/10 dark:border-[#CF9D7B]/10">
+                        <button onClick={() => setViewingFile(file)} className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-[#FAFAFA] dark:text-[#0C1519] bg-cyprus dark:bg-[#CF9D7B] hover:opacity-90 transition-colors">
                           <Eye className="w-4 h-4" />
                           Read
                         </button>
-                        <a href={file.driveUrl} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-cyprus bg-cyprus/5 hover:bg-cyprus/10 transition-colors">
+                        <a href={file.driveUrl} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-cyprus dark:text-[#CF9D7B] bg-cyprus/5 dark:bg-[#CF9D7B]/5 hover:bg-cyprus/10 dark:hover:bg-[#CF9D7B]/10 transition-colors">
                            <ExternalLink className="w-4 h-4" />
                            Drive
                          </a>
-                         <a href={file.downloadUrl} target="_blank" rel="noopener noreferrer" download className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-cyprus bg-cyprus/5 hover:bg-cyprus/10 transition-colors">
+                         <a href={file.downloadUrl} target="_blank" rel="noopener noreferrer" download className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-cyprus dark:text-[#CF9D7B] bg-cyprus/5 dark:bg-[#CF9D7B]/5 hover:bg-cyprus/10 dark:hover:bg-[#CF9D7B]/10 transition-colors">
                            <Download className="w-4 h-4" />
                            Save
                          </a>
@@ -560,10 +538,10 @@ export default function AcademicsPage() {
                   ))}
                 </div>
               ) : (
-                <div className="p-8 rounded-2xl border-2 border-cyprus/20 border-dashed bg-[#FAFAFA] shadow-sm flex flex-col items-center justify-center">
-                  <FileText className="w-12 h-12 mb-3 text-cyprus/30" />
-                  <h3 className="text-lg font-bold text-cyprus mb-1 text-center">No Files Available</h3>
-                  <p className="text-cyprus/60 font-medium text-center text-sm">PYQs for {selectedPyqType} will appear here.</p>
+                <div className="p-8 rounded-2xl border-2 border-cyprus/20 dark:border-[#CF9D7B]/20 border-dashed bg-[#FAFAFA] dark:bg-[#0C1519] shadow-sm flex flex-col items-center justify-center transition-colors duration-300">
+                  <FileText className="w-12 h-12 mb-3 text-cyprus/30 dark:text-[#CF9D7B]/30" />
+                  <h3 className="text-lg font-bold text-cyprus dark:text-[#CF9D7B] mb-1 text-center">No Files Available</h3>
+                  <p className="text-cyprus/60 dark:text-[#CF9D7B]/60 font-medium text-center text-sm">PYQs for {selectedPyqType} will appear here.</p>
                 </div>
               )}
             </div>
@@ -573,25 +551,25 @@ export default function AcademicsPage() {
 
       {/* Live Document Reader Modal */}
       {viewingFile && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-cyprus/80 backdrop-blur-sm animate-in fade-in duration-300">
-          <div className="bg-[#FAFAFA] w-full max-w-5xl h-[85vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-cyprus/80 dark:bg-[#0C1519]/80 backdrop-blur-sm animate-in fade-in duration-300 transition-colors">
+          <div className="bg-[#FAFAFA] dark:bg-[#0C1519] border-2 border-cyprus dark:border-[#CF9D7B] w-full max-w-5xl h-[85vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 transition-colors">
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-cyprus/10">
+            <div className="flex items-center justify-between p-4 border-b border-cyprus/10 dark:border-[#CF9D7B]/10">
               <div className="flex items-center gap-3 overflow-hidden">
-                <div className="p-2 bg-cyprus/10 text-cyprus rounded-lg shrink-0">
+                <div className="p-2 bg-cyprus/10 dark:bg-[#CF9D7B]/10 text-cyprus dark:text-[#CF9D7B] rounded-lg shrink-0">
                   <FileText className="w-5 h-5" />
                 </div>
-                <h3 className="font-bold text-cyprus truncate">{viewingFile.name}</h3>
+                <h3 className="font-bold text-cyprus dark:text-[#CF9D7B] truncate">{viewingFile.name}</h3>
               </div>
               <button 
                 onClick={() => setViewingFile(null)}
-                className="p-2 text-cyprus/60 hover:text-cyprus hover:bg-cyprus/10 rounded-full transition-colors shrink-0"
+                className="p-2 text-cyprus/60 dark:text-[#CF9D7B]/60 hover:text-cyprus dark:hover:text-[#CF9D7B] hover:bg-cyprus/10 dark:hover:bg-[#CF9D7B]/10 rounded-full transition-colors shrink-0"
               >
                 <X className="w-6 h-6" />
               </button>
             </div>
             {/* Content (Iframe) */}
-            <div className="flex-1 bg-cyprus/5 relative">
+            <div className="flex-1 bg-cyprus/5 dark:bg-[#CF9D7B]/5 relative transition-colors duration-300">
               <iframe 
                 src={viewingFile.previewUrl} 
                 className="absolute inset-0 w-full h-full border-none"

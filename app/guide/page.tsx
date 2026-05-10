@@ -6,21 +6,23 @@ import {
   Lightbulb,
   CheckCircle2
 } from "lucide-react"
+import { ThemeToggle } from "../../components/ThemeToggle"
+import { BackgroundShapes } from "../../components/BackgroundShapes"
 
 export default function GuidePage() {
 
   const tips = [
     "CUSAT exams can be tricky. Focus on previous year question papers and maintain good internal marks.",
     
-    "Use KSRTC bus timings and ferry services properly. They are important in Kuttanad.",
+    "KSRTC is the only mode of bus transportation available; private buses do not operate in the area.",
 
-    "Always carry an umbrella during monsoon season.",
+    "Carry sunscreen and an umbrella throughout the year — not just during the monsoon, but also during summer due to the strong heat and sudden weather changes.",
 
     "Join communities like TinkerHub and IEEE for networking and technical growth.",
 
     "Build a good relationship with seniors. They help a lot during academics and placements.",
 
-    "Keep digital copies of all important documents.",
+    "Keep digital copies of important documents with you, as printed copies may be required at any time.",
 
     "Respect hostel timings and campus rules.",
 
@@ -28,23 +30,17 @@ export default function GuidePage() {
   ]
 
   return (
-    <div className="relative min-h-screen bg-sand-dune px-6 py-12 overflow-hidden isolate">
+    <div className="relative min-h-screen bg-sand-dune dark:bg-[#0C1519] px-6 py-12 overflow-hidden isolate transition-colors duration-300">
 
-      {/* Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-
-        <div className="absolute top-[40%] left-[5%] w-[800px] h-[600px] bg-[#C1E1C1] rounded-[50%_50%_20%_80%/50%_20%_80%_50%] blur-[40px] opacity-65 rotate-[45deg]" />
-
-        <div className="absolute bottom-[-15%] left-[-10%] w-[700px] h-[700px] bg-[#E6E6FA] rounded-[20%_80%_50%_50%/80%_50%_50%_20%] blur-[40px] opacity-70 -rotate-[30deg]" />
-
-      </div>
+      <ThemeToggle />
+      <BackgroundShapes />
 
       <div className="relative z-10 max-w-4xl mx-auto mt-20">
 
         {/* Back Button */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-cyprus hover:opacity-70 transition-opacity mb-10 group"
+          className="inline-flex items-center gap-2 text-cyprus dark:text-[#CF9D7B] px-4 py-2 -ml-4 rounded-full hover:bg-cyprus dark:hover:bg-[#CF9D7B] hover:text-[#FAFAFA] dark:hover:text-[#0C1519] transition-colors mb-10 group"
         >
 
           <ArrowLeft
@@ -67,37 +63,37 @@ export default function GuidePage() {
 
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-black text-cyprus tracking-tighter uppercase">
+          <h1 className="text-4xl md:text-5xl font-black text-cyprus dark:text-[#CF9D7B] tracking-tighter uppercase transition-colors duration-300">
             Student Guide
           </h1>
 
-          <p className="mt-4 text-cyprus/60 font-medium max-w-lg italic">
+          <p className="mt-4 text-cyprus/60 dark:text-[#CF9D7B]/60 font-medium max-w-lg italic transition-colors duration-300">
             Essential tips for CUCEK students
           </p>
 
         </div>
 
         {/* Guide Box */}
-        <div className="max-w-3xl mx-auto glass p-8 md:p-12 rounded-[2.5rem] border border-cyprus/10 shadow-xl">
+        <div className="max-w-3xl mx-auto bg-[#FAFAFA] dark:bg-[#0C1519] border-2 border-cyprus dark:border-[#CF9D7B] p-8 md:p-12 rounded-[2.5rem] shadow-xl transition-colors duration-300">
 
           <ul className="space-y-6">
 
             {tips.map((tip, index) => (
               <li
                 key={index}
-                className="flex items-start gap-4 group"
+                className="flex items-start gap-4 group p-4 -mx-4 rounded-2xl hover:bg-cyprus dark:hover:bg-[#CF9D7B] transition-colors duration-300 cursor-default"
               >
 
-                <div className="mt-1 bg-cyprus/10 p-1 rounded-full group-hover:bg-cyprus/20 transition-colors shrink-0">
+                <div className="mt-1 bg-cyprus/10 dark:bg-[#CF9D7B]/10 p-1 rounded-full group-hover:bg-[#FAFAFA]/20 dark:group-hover:bg-[#0C1519]/20 transition-colors duration-300 shrink-0">
 
                   <CheckCircle2
                     size={20}
-                    className="text-cyprus"
+                    className="text-cyprus dark:text-[#CF9D7B] group-hover:text-[#FAFAFA] dark:group-hover:text-[#0C1519] transition-colors duration-300"
                   />
 
                 </div>
 
-                <p className="text-cyprus/80 text-lg leading-relaxed font-medium">
+                <p className="text-cyprus/80 dark:text-[#CF9D7B]/80 group-hover:text-[#FAFAFA]/90 dark:group-hover:text-[#0C1519]/90 text-lg leading-relaxed font-medium transition-colors duration-300">
                   {tip}
                 </p>
 

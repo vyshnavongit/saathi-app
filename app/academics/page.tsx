@@ -3,7 +3,7 @@
 // Force Turbopack rebuild
 import { useState } from "react"
 import Link from "next/link"
-import { BookOpen, ChevronRight, FileText, Home, Folder, Circle, Square, Triangle, Hexagon, Star } from "lucide-react"
+import { BookOpen, ChevronRight, FileText, Home, Folder, Circle, Square, Triangle, Hexagon, Star, Download, ExternalLink, Eye, X } from "lucide-react"
 
 export default function AcademicsPage() {
   const [selectedSemester, setSelectedSemester] = useState<any>(null);
@@ -11,6 +11,9 @@ export default function AcademicsPage() {
   const [selectedBranch, setSelectedBranch] = useState<any>(null);
   const [selectedContentType, setSelectedContentType] = useState<string | null>(null);
   const [selectedPyqType, setSelectedPyqType] = useState<string | null>(null);
+  const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
+  const [selectedModule, setSelectedModule] = useState<string | null>(null);
+  const [viewingFile, setViewingFile] = useState<any>(null);
 
   const semesters = [
     { id: "1", name: "Semester 1", type: "streams" },
@@ -107,6 +110,34 @@ export default function AcademicsPage() {
   const notesSubjects = currentSubjects.filter((s) => !isLabSubject(s));
   const recordSubjects = currentSubjects.filter((s) => isLabSubject(s));
 
+  // Simulated dynamic files array - wire this to your backend later
+  let documentFiles: any[] = [];
+
+  const isIeeLab = selectedSubject && (
+    selectedSubject.toLowerCase().includes("electrical") && 
+    (selectedSubject.toLowerCase().includes("lab") || selectedSubject.toLowerCase().includes("laboratory"))
+  );
+
+  if (selectedContentType === "Notes" && selectedSubject === "Calculus" && selectedModule === "Module 1") {
+    documentFiles = [
+      { id: 1, name: "Calculus Module 1.pdf", date: "Updated recently", size: "2.4 MB", downloadUrl: "https://drive.google.com/uc?export=download&id=10h4DluGxdhD3vOSHSmlnXuRoRL5igGbE", driveUrl: "https://drive.google.com/file/d/10h4DluGxdhD3vOSHSmlnXuRoRL5igGbE/view", previewUrl: "https://drive.google.com/file/d/10h4DluGxdhD3vOSHSmlnXuRoRL5igGbE/preview" }
+    ];
+  } else if (selectedContentType === "Record" && isIeeLab) {
+    documentFiles = [
+      { id: 1, name: "IEE Lab Record.pdf", date: "Updated recently", size: "1.8 MB", downloadUrl: "#", driveUrl: "#", previewUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" }
+    ];
+  } else if (selectedContentType === "PYQ" && selectedPyqType) {
+    documentFiles = [
+      { id: 1, name: "CPP_PYQ_Previous_Years.pdf", date: "Updated recently", size: "3.5 MB", downloadUrl: "#", driveUrl: "https://drive.google.com", previewUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" },
+      { id: 2, name: `${selectedPyqType} - Reference Papers.pdf`, date: "Updated recently", size: "1.1 MB", downloadUrl: "#", driveUrl: "https://drive.google.com", previewUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" }
+    ];
+  } else if (selectedModule || selectedPyqType || (selectedContentType === "Record" && selectedSubject)) {
+    documentFiles = [
+      { id: 1, name: `${selectedModule || selectedPyqType || 'Document'} - Part 1.pdf`, date: "Updated recently", size: "2.4 MB", downloadUrl: "#", driveUrl: "https://drive.google.com", previewUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" },
+      { id: 2, name: "Reference_Material.pdf", date: "Updated recently", size: "1.1 MB", downloadUrl: "#", driveUrl: "https://drive.google.com", previewUrl: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" }
+    ];
+  }
+
   return (
     <div className="relative min-h-screen bg-sand-dune px-6 py-12 overflow-hidden isolate">
       {/* Background blobs */}
@@ -150,7 +181,7 @@ export default function AcademicsPage() {
           </Link>
           <ChevronRight className="w-4 h-4 opacity-50" />
           <button 
-            onClick={() => { setSelectedSemester(null); setSelectedStream(null); setSelectedBranch(null); setSelectedContentType(null); setSelectedPyqType(null); }}
+            onClick={() => { setSelectedSemester(null); setSelectedStream(null); setSelectedBranch(null); setSelectedContentType(null); setSelectedPyqType(null); setSelectedSubject(null); setSelectedModule(null); }}
             className={`hover:text-cyprus transition-colors flex items-center gap-1 text-sm font-medium ${!selectedSemester ? 'text-cyprus font-bold' : ''}`}
           >
             <Folder className="w-4 h-4" />
@@ -161,7 +192,7 @@ export default function AcademicsPage() {
             <>
               <ChevronRight className="w-4 h-4 opacity-50" />
               <button 
-                onClick={() => { setSelectedStream(null); setSelectedBranch(null); setSelectedContentType(null); setSelectedPyqType(null); }}
+                onClick={() => { setSelectedStream(null); setSelectedBranch(null); setSelectedContentType(null); setSelectedPyqType(null); setSelectedSubject(null); setSelectedModule(null); }}
                 className={`hover:text-cyprus transition-colors flex items-center gap-1 text-sm font-medium ${!selectedBranch && !selectedStream ? 'text-cyprus font-bold' : ''}`}
               >
                 <Folder className="w-4 h-4" />
@@ -174,7 +205,7 @@ export default function AcademicsPage() {
             <>
               <ChevronRight className="w-4 h-4 opacity-50" />
               <button 
-                onClick={() => { setSelectedBranch(null); setSelectedContentType(null); setSelectedPyqType(null); }}
+                onClick={() => { setSelectedBranch(null); setSelectedContentType(null); setSelectedPyqType(null); setSelectedSubject(null); setSelectedModule(null); }}
                 className={`hover:text-cyprus transition-colors flex items-center gap-1 text-sm font-medium ${!selectedBranch ? 'text-cyprus font-bold' : ''}`}
               >
                 <Folder className="w-4 h-4" />
@@ -187,7 +218,7 @@ export default function AcademicsPage() {
             <>
               <ChevronRight className="w-4 h-4 opacity-50" />
               <button 
-                onClick={() => { setSelectedContentType(null); setSelectedPyqType(null); }}
+                onClick={() => { setSelectedContentType(null); setSelectedPyqType(null); setSelectedSubject(null); setSelectedModule(null); }}
                 className={`hover:text-cyprus transition-colors flex items-center gap-1 text-sm font-medium ${!selectedContentType ? 'text-cyprus font-bold' : ''}`}
               >
                 <Folder className="w-4 h-4" />
@@ -200,8 +231,8 @@ export default function AcademicsPage() {
             <>
               <ChevronRight className="w-4 h-4 opacity-50" />
               <button 
-                onClick={() => setSelectedPyqType(null)}
-                className={`hover:text-cyprus transition-colors flex items-center gap-1 text-sm font-medium ${!selectedPyqType ? 'text-cyprus font-bold' : ''}`}
+                onClick={() => { setSelectedPyqType(null); setSelectedSubject(null); setSelectedModule(null); }}
+                className={`hover:text-cyprus transition-colors flex items-center gap-1 text-sm font-medium ${!selectedPyqType && !selectedSubject ? 'text-cyprus font-bold' : ''}`}
               >
                 <Folder className="w-4 h-4" />
                 {selectedContentType}
@@ -215,6 +246,29 @@ export default function AcademicsPage() {
               <span className="text-cyprus font-bold flex items-center gap-1 text-sm">
                 <Folder className="w-4 h-4" />
                 {selectedPyqType}
+              </span>
+            </>
+          )}
+
+          {selectedSubject && (
+            <>
+              <ChevronRight className="w-4 h-4 opacity-50" />
+              <button 
+                onClick={() => setSelectedModule(null)}
+                className={`hover:text-cyprus transition-colors flex items-center gap-1 text-sm font-medium ${!selectedModule ? 'text-cyprus font-bold' : ''}`}
+              >
+                <Folder className="w-4 h-4" />
+                <span className="max-w-[150px] md:max-w-[300px] truncate">{selectedSubject}</span>
+              </button>
+            </>
+          )}
+
+          {selectedModule && (
+            <>
+              <ChevronRight className="w-4 h-4 opacity-50" />
+              <span className="text-cyprus font-bold flex items-center gap-1 text-sm">
+                <Folder className="w-4 h-4" />
+                {selectedModule}
               </span>
             </>
           )}
@@ -301,11 +355,15 @@ export default function AcademicsPage() {
           )}
 
           {/* Note or Record Subjects Listing */}
-          {(selectedContentType === 'Notes' || selectedContentType === 'Record') && (
+          {(selectedContentType === 'Notes' || selectedContentType === 'Record') && !selectedSubject && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
               {(selectedContentType === 'Notes' ? notesSubjects : recordSubjects).length > 0 ? (
                 (selectedContentType === 'Notes' ? notesSubjects : recordSubjects).map((sub, idx) => (
-                  <div key={idx} className="group p-3 rounded-xl flex items-center gap-3 border-2 border-cyprus bg-[#FAFAFA] text-cyprus hover:bg-cyprus hover:text-[#FAFAFA] shadow-sm hover:shadow-md transition-all cursor-pointer">
+                  <div 
+                    key={idx} 
+                    onClick={() => setSelectedSubject(sub)}
+                    className="group p-3 rounded-xl flex items-center gap-3 border-2 border-cyprus bg-[#FAFAFA] text-cyprus hover:bg-cyprus hover:text-[#FAFAFA] shadow-sm hover:shadow-md transition-all cursor-pointer"
+                  >
                     <div className="bg-cyprus/10 group-hover:bg-[#FAFAFA] group-hover:text-cyprus p-2.5 rounded-lg shrink-0 transition-colors">
                        <FileText className="w-5 h-5" />
                     </div>
@@ -317,6 +375,125 @@ export default function AcademicsPage() {
                    <FileText className="w-12 h-12 mb-3 text-cyprus/40" />
                    <h3 className="text-xl font-bold text-cyprus mb-2 text-center">No Subjects Found</h3>
                    <p className="text-cyprus/60 font-medium text-center">No subjects mapped to {selectedContentType} for this semester yet.</p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Modules Listing (Inside a Subject) */}
+          {selectedContentType === 'Notes' && selectedSubject && !selectedModule && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
+              {["Module 1", "Module 2", "Module 3", "Module 4"].map((mod) => (
+                <div 
+                  key={mod}
+                  className="group p-4 rounded-xl transition-all duration-300 flex items-center justify-between border-2 border-cyprus bg-[#FAFAFA] text-cyprus hover:bg-cyprus hover:text-[#FAFAFA] shadow-sm hover:shadow-md cursor-pointer"
+                  onClick={() => setSelectedModule(mod)}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="bg-cyprus/10 group-hover:bg-[#FAFAFA] group-hover:text-cyprus p-2.5 rounded-lg transition-colors duration-300">
+                       <Folder className="w-5 h-5" />
+                    </div>
+                    <span className="font-bold text-base">{mod}</span>
+                  </div>
+                  <ChevronRight className="w-6 h-6 opacity-50 group-hover:opacity-100 transition-opacity shrink-0" />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Module Content / Empty State */}
+          {selectedContentType === 'Notes' && selectedModule && (
+            <div className="animate-in fade-in zoom-in-95 duration-500 flex flex-col gap-6">
+              <div className="bg-[#FAFAFA] p-5 md:p-6 rounded-2xl border-2 border-cyprus shadow-sm">
+                <h3 className="text-xl font-bold text-cyprus mb-1">{selectedModule}</h3>
+                <p className="text-cyprus/70 text-sm font-medium">View notes for {selectedSubject}.</p>
+              </div>
+
+              {/* Live Files Layout */}
+              {documentFiles.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {documentFiles.map((file) => (
+                    <div key={file.id} className="group p-4 bg-[#FAFAFA] border-2 border-cyprus/20 hover:border-cyprus rounded-xl transition-all shadow-sm hover:shadow-md flex flex-col gap-4">
+                      <div className="flex items-center gap-4 overflow-hidden">
+                        <div className="p-3 bg-cyprus/10 text-cyprus rounded-lg transition-colors shrink-0">
+                          <FileText className="w-6 h-6" />
+                        </div>
+                        <div className="truncate flex-1">
+                          <h4 className="font-bold text-cyprus text-sm truncate">{file.name}</h4>
+                          <span className="text-xs text-cyprus/60 font-medium">{file.date} • {file.size}</span>
+                        </div>
+                      </div>
+                      <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-cyprus/10">
+                        <button onClick={() => setViewingFile(file)} className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-[#FAFAFA] bg-cyprus hover:bg-opacity-90 transition-colors">
+                          <Eye className="w-4 h-4" />
+                          Read
+                        </button>
+                        <a href={file.driveUrl} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-cyprus bg-cyprus/5 hover:bg-cyprus/10 transition-colors">
+                           <ExternalLink className="w-4 h-4" />
+                           Drive
+                         </a>
+                         <a href={file.downloadUrl} target="_blank" rel="noopener noreferrer" download className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-cyprus bg-cyprus/5 hover:bg-cyprus/10 transition-colors">
+                           <Download className="w-4 h-4" />
+                           Save
+                         </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="p-8 rounded-2xl border-2 border-cyprus/20 border-dashed bg-[#FAFAFA] shadow-sm flex flex-col items-center justify-center">
+                  <FileText className="w-12 h-12 mb-3 text-cyprus/30" />
+                  <h3 className="text-lg font-bold text-cyprus mb-1 text-center">No Files Available</h3>
+                  <p className="text-cyprus/60 font-medium text-center text-sm">Notes for {selectedModule} will appear here.</p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Record Files (Directly inside Subject) */}
+          {selectedContentType === 'Record' && selectedSubject && (
+            <div className="animate-in fade-in zoom-in-95 duration-500 flex flex-col gap-6">
+              <div className="bg-[#FAFAFA] p-5 md:p-6 rounded-2xl border-2 border-cyprus shadow-sm">
+                <h3 className="text-xl font-bold text-cyprus mb-1">{selectedSubject}</h3>
+                <p className="text-cyprus/70 text-sm font-medium">View record documents for {selectedSubject}.</p>
+              </div>
+
+              {/* Live Files Layout */}
+              {documentFiles.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {documentFiles.map((file) => (
+                    <div key={file.id} className="group p-4 bg-[#FAFAFA] border-2 border-cyprus/20 hover:border-cyprus rounded-xl transition-all shadow-sm hover:shadow-md flex flex-col gap-4">
+                      <div className="flex items-center gap-4 overflow-hidden">
+                        <div className="p-3 bg-cyprus/10 text-cyprus rounded-lg transition-colors shrink-0">
+                          <FileText className="w-6 h-6" />
+                        </div>
+                        <div className="truncate flex-1">
+                          <h4 className="font-bold text-cyprus text-sm truncate">{file.name}</h4>
+                          <span className="text-xs text-cyprus/60 font-medium">{file.date} • {file.size}</span>
+                        </div>
+                      </div>
+                      <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-cyprus/10">
+                        <button onClick={() => setViewingFile(file)} className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-[#FAFAFA] bg-cyprus hover:bg-opacity-90 transition-colors">
+                          <Eye className="w-4 h-4" />
+                          Read
+                        </button>
+                        <a href={file.driveUrl} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-cyprus bg-cyprus/5 hover:bg-cyprus/10 transition-colors">
+                           <ExternalLink className="w-4 h-4" />
+                           Drive
+                         </a>
+                         <a href={file.downloadUrl} target="_blank" rel="noopener noreferrer" download className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-cyprus bg-cyprus/5 hover:bg-cyprus/10 transition-colors">
+                           <Download className="w-4 h-4" />
+                           Save
+                         </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="p-8 rounded-2xl border-2 border-cyprus/20 border-dashed bg-[#FAFAFA] shadow-sm flex flex-col items-center justify-center">
+                  <FileText className="w-12 h-12 mb-3 text-cyprus/30" />
+                  <h3 className="text-lg font-bold text-cyprus mb-1 text-center">No Files Available</h3>
+                  <p className="text-cyprus/60 font-medium text-center text-sm">Records for {selectedSubject} will appear here.</p>
                 </div>
               )}
             </div>
@@ -345,14 +522,85 @@ export default function AcademicsPage() {
 
           {/* PYQ Files / Empty State */}
           {selectedPyqType && (
-            <div className="p-8 rounded-2xl border-2 border-cyprus bg-[#FAFAFA] shadow-sm flex flex-col items-center justify-center animate-in fade-in zoom-in-95 duration-500">
-                <FileText className="w-12 h-12 mb-3 text-cyprus/40 animate-pulse" />
-                <h3 className="text-xl font-bold text-cyprus mb-2 text-center">{selectedPyqType}</h3>
-                <p className="text-cyprus/60 font-medium text-center">No PYQ documents found for {selectedPyqType} yet.</p>
+            <div className="animate-in fade-in zoom-in-95 duration-500 flex flex-col gap-6">
+              <div className="bg-[#FAFAFA] p-5 md:p-6 rounded-2xl border-2 border-cyprus shadow-sm">
+                <h3 className="text-xl font-bold text-cyprus mb-1">{selectedPyqType}</h3>
+                <p className="text-cyprus/70 text-sm font-medium">View PYQ documents for {selectedBranch?.name}.</p>
+              </div>
+
+              {/* Live Files Layout */}
+              {documentFiles.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {documentFiles.map((file) => (
+                    <div key={file.id} className="group p-4 bg-[#FAFAFA] border-2 border-cyprus/20 hover:border-cyprus rounded-xl transition-all shadow-sm hover:shadow-md flex flex-col gap-4">
+                      <div className="flex items-center gap-4 overflow-hidden">
+                        <div className="p-3 bg-cyprus/10 text-cyprus rounded-lg transition-colors shrink-0">
+                          <FileText className="w-6 h-6" />
+                        </div>
+                        <div className="truncate flex-1">
+                          <h4 className="font-bold text-cyprus text-sm truncate">{file.name}</h4>
+                          <span className="text-xs text-cyprus/60 font-medium">{file.date} • {file.size}</span>
+                        </div>
+                      </div>
+                      <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-cyprus/10">
+                        <button onClick={() => setViewingFile(file)} className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-[#FAFAFA] bg-cyprus hover:bg-opacity-90 transition-colors">
+                          <Eye className="w-4 h-4" />
+                          Read
+                        </button>
+                        <a href={file.driveUrl} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-cyprus bg-cyprus/5 hover:bg-cyprus/10 transition-colors">
+                           <ExternalLink className="w-4 h-4" />
+                           Drive
+                         </a>
+                         <a href={file.downloadUrl} target="_blank" rel="noopener noreferrer" download className="flex-1 min-w-[80px] flex items-center justify-center gap-1 py-2 px-2 rounded-lg text-xs font-bold text-cyprus bg-cyprus/5 hover:bg-cyprus/10 transition-colors">
+                           <Download className="w-4 h-4" />
+                           Save
+                         </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="p-8 rounded-2xl border-2 border-cyprus/20 border-dashed bg-[#FAFAFA] shadow-sm flex flex-col items-center justify-center">
+                  <FileText className="w-12 h-12 mb-3 text-cyprus/30" />
+                  <h3 className="text-lg font-bold text-cyprus mb-1 text-center">No Files Available</h3>
+                  <p className="text-cyprus/60 font-medium text-center text-sm">PYQs for {selectedPyqType} will appear here.</p>
+                </div>
+              )}
             </div>
           )}
         </div>
       </div>
+
+      {/* Live Document Reader Modal */}
+      {viewingFile && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-cyprus/80 backdrop-blur-sm animate-in fade-in duration-300">
+          <div className="bg-[#FAFAFA] w-full max-w-5xl h-[85vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-300">
+            {/* Header */}
+            <div className="flex items-center justify-between p-4 border-b border-cyprus/10">
+              <div className="flex items-center gap-3 overflow-hidden">
+                <div className="p-2 bg-cyprus/10 text-cyprus rounded-lg shrink-0">
+                  <FileText className="w-5 h-5" />
+                </div>
+                <h3 className="font-bold text-cyprus truncate">{viewingFile.name}</h3>
+              </div>
+              <button 
+                onClick={() => setViewingFile(null)}
+                className="p-2 text-cyprus/60 hover:text-cyprus hover:bg-cyprus/10 rounded-full transition-colors shrink-0"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            {/* Content (Iframe) */}
+            <div className="flex-1 bg-cyprus/5 relative">
+              <iframe 
+                src={viewingFile.previewUrl} 
+                className="absolute inset-0 w-full h-full border-none"
+                title={viewingFile.name}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

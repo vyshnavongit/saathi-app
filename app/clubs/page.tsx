@@ -101,10 +101,13 @@ function ClubCard({ item }: { item: any }) {
               return (
                 <div 
                   key={photo.id}
-                  className={`absolute top-0 left-0 w-full h-full rounded-2xl border flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${colors[idx]} ${styles} ${isOpen ? "border-[#FAFAFA]/20" : "border-cyprus/10"}`}
+                  className={`absolute top-0 left-0 w-full h-full rounded-2xl border overflow-hidden flex flex-col items-center justify-center transition-all duration-500 ease-in-out ${colors[idx]} ${styles} ${isOpen ? "border-[#FAFAFA]/20" : "border-cyprus/10"}`}
                 >
-                  <ImageIcon className={`w-8 h-8 mb-2 ${isOpen ? "text-[#FAFAFA]/60" : "text-cyprus/40"}`} />
-                  <span className={`font-semibold text-sm px-2 text-center ${isOpen ? "text-[#FAFAFA]/80" : "text-cyprus/60"}`}>{photo.label}</span>
+                  {photo.src ? (
+                    <img src={photo.src} alt={photo.label} className="absolute inset-0 w-full h-full object-cover" />
+                  ) : (
+                    <ImageIcon className={`w-8 h-8 ${isOpen ? "text-[#FAFAFA]/60" : "text-cyprus/40"}`} />
+                  )}
                 </div>
               );
             })}
@@ -121,20 +124,20 @@ export default function ClubsPage() {
     { 
       name: "Sports Club", 
       icon: Trophy,
-      description: "Join the Sports Club to stay active, participate in inter-college tournaments, and build team spirit. We host events for football, basketball, cricket, and athletics.",
-      photos: [ { id: 1, label: "Football" }, { id: 2, label: "Basketball" }, { id: 3, label: "Athletics" } ]
+      description: "Our club provides a premier environment for athletes to compete and improve. Members enjoy popular team sports including football, cricket, and volleyball. We offer professional facilities for racket sports like badminton and table tennis. This vibrant community fosters both fitness and friendly competition. Join us to experience a dynamic atmosphere built for reaching your peak performance.",
+      photos: [ { id: 1, label: "Football", src: "/sports/1.jpeg" }, { id: 2, label: "Basketball", src: "/sports/2.jpeg" }, { id: 3, label: "Athletics", src: "/sports/3.jpeg" } ]
     },
     { 
       name: "Photography Club", 
       icon: Camera,
-      description: "Capture the best moments on campus. From workshops on DSLR basics to photo walks and exhibitions, the Photography Club is for everyone who loves the lens.",
-      photos: [ { id: 1, label: "Portraits" }, { id: 2, label: "Landscapes" }, { id: 3, label: "Events" } ]
+      description: "The CUECK Photography Club serves as a creative hub for students to master the art of visual storytelling through workshops and collaborative photo walks. We focus on documenting the vibrant atmosphere of campus life and the scenic beauty of the surrounding Kuttanad landscapes. Members of all skill levels are welcome to refine their technical abilities while showcasing their unique perspectives through regular exhibitions.",
+      photos: [ { id: 1, label: "Portraits", src: "/photography/1.jpeg" }, { id: 2, label: "Landscapes", src: "/photography/2.jpeg" }, { id: 3, label: "Events", src: "/photography/3.jpeg" } ]
     },
     { 
       name: "Arts Club", 
       icon: Palette,
-      description: "Unleash your creativity with the Arts Club. Whether you are into painting, sketching, digital art, or crafts, we provide a welcoming space to express yourself.",
-      photos: [ { id: 1, label: "Painting" }, { id: 2, label: "Sketching" }, { id: 3, label: "Exhibition" } ]
+      description: "Our arts club serves as a vibrant hub for creative expression and artistic growth. We provide diverse opportunities in painting, music, dance, and theater for every talent. Members enjoy a collaborative space designed to inspire original works and fresh perspectives. Regular workshops and showcases allow artists to refine their craft and share it. Join our community to explore your imagination and connect with fellow creators.",
+      photos: [ { id: 1, label: "Painting", src: "/arts/1.jpeg" }, { id: 2, label: "Sketching", src: "/arts/2.jpeg" }, { id: 3, label: "Exhibition", src: "/arts/3.jpeg" } ]
     }
   ]
 
@@ -142,26 +145,20 @@ export default function ClubsPage() {
     { 
       name: "TinkerHub", 
       icon: Code,
-      description: "A community of tech enthusiasts and innovators. Build projects, participate in hackathons, and learn the latest technologies together with peers.",
-      photos: [ { id: 1, label: "Hackathon" }, { id: 2, label: "Workshops" }, { id: 3, label: "Projects" } ]
+      description: "The TinkerHub chapter at CUECK is a vibrant technical community dedicated to fostering a culture of making and peer-to-peer learning. We provide students with the resources and mentorship needed to explore emerging technologies, from software development to hardware innovation. By hosting hackathons and hands-on workshops, we bridge the gap between academic theory and real-world problem solving.",
+      photos: [ { id: 1, label: "Hackathon", src: "/tinkerhub/1.jpeg" }, { id: 2, label: "Workshops", src: "/tinkerhub/2.jpeg" }, { id: 3, label: "Projects", src: "/tinkerhub/3.jpeg" } ]
     },
     { 
       name: "Skill Development Club", 
       icon: Lightbulb,
-      description: "Focus on enhancing your soft skills, leadership qualities, and professional development to prepare for the career ahead.",
-      photos: [ { id: 1, label: "Seminars" }, { id: 2, label: "Public Speaking" }, { id: 3, label: "Networking" } ]
-    },
-    { 
-      name: "Lenient Tree", 
-      icon: Leaf,
-      description: "Our environmental and nature club. Participate in tree planting drives, sustainability campaigns, and nature awareness programs.",
-      photos: [ { id: 1, label: "Plantation" }, { id: 2, label: "Cleanup Drives" }, { id: 3, label: "Awareness" } ]
+      description: "The Skill Development cell at CUECK focuses on equipping students with essential professional competencies and soft skills that transcend the standard engineering curriculum. Through targeted training sessions and industry interaction, we prepare members for the rigors of placements and the corporate world. This initiative ensures that every participant graduates with a balanced profile of technical expertise and the interpersonal leadership required for a successful career.",
+      photos: [ { id: 1, label: "Seminars", src: "/skill-development/1.jpeg" }, { id: 2, label: "Public Speaking", src: "/skill-development/2.jpeg" }, { id: 3, label: "Networking", src: "/skill-development/3.jpeg" } ]
     },
     { 
       name: "μLearn", 
       icon: Users2,
-      description: "An industry-academia community helping students learn new skills, network with professionals, and get career-ready through mentorship.",
-      photos: [ { id: 1, label: "Bootcamps" }, { id: 2, label: "Mentorship" }, { id: 3, label: "Meetups" } ]
+      description: "The μLearn chapter at CUECK is a student-driven peer learning community that focuses on bridging the gap between academic knowledge and industry requirements. We utilize a gamified platform where members earn \"Karma Points\" by completing technical challenges, participating in interest groups, and engaging in collaborative micro-learning. Our mission is to empower students with job-ready skills and networking opportunities through a culture of mutual mentorship and real-world project experience.",
+      photos: [ { id: 1, label: "Bootcamps", src: "/mulearn/1.jpeg" }, { id: 2, label: "Mentorship", src: "/mulearn/2.jpeg" }, { id: 3, label: "Meetups", src: "/mulearn/3.jpeg" } ]
     }
   ]
 

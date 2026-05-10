@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Inter, Geist } from "next/font/google"
 import "./globals.css";
 
+import DynamicBackground from "@/components/DynamicBackground";
 import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
@@ -20,8 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={cn("scroll-smooth", "font-sans", geist.variable)} suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>
-        <main>{children}</main>
+      <body className={cn(inter.className, "antialiased relative min-h-screen")}>
+        <DynamicBackground />
+        <main className="relative z-10">{children}</main>
       </body>
     </html>
   );

@@ -10,7 +10,7 @@ const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "SAATHI - Your AI Companion",
+  title: "SAATHI",
   description: "Comprehensive AI partner for your daily productivity.",
 };
 

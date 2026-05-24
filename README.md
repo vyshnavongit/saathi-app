@@ -61,13 +61,3 @@ Ensure your local development environment is configured with the following tools
 * **Runtime:** [Node.js](https://nodejs.org/)
 * **Package Manager:** `npm`
 * **Version Control:** [Git](https://git-scm.com/) & [GitHub](https://github.com/)
-
-### Recommended VS Code Extensions
-
-To maintain code quality and streamline collaboration, install these extensions:
-
-1. **[ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)**: Real-time error checking.
-2. **[Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)**: Opinionated code formatter.
-3. **[Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)**: Advanced autocomplete and linting for Tailwind classes.
-4. **[GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)**: Supercharge Git capabilities within VS Code.
-5. **[Live Share](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare)**: Real-time collaborative development.
